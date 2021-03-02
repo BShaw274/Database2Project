@@ -55,7 +55,7 @@ CREATE TABLE `users` (
 -- ----------------------------
 
 DELETE FROM `users`;
-INSERT INTO `users` VALUES (NULL, 'bob@Gmail.com', 'bob', 'bob', '01229');
+INSERT INTO `users` VALUES ('001', 'admin@gmail.com', 'admin', 'Admin', '1-800-ADMIN');
 INSERT INTO `users` VALUES (NULL, 'bob1@Gmail.com', 'bob', 'bob', '01229');
 INSERT INTO `users` VALUES (NULL, 'bob2@Gmail.com', 'bob', 'bob', '01229');
 INSERT INTO `users` VALUES (NULL, 'bob3@Gmail.com', 'bob', 'bob', '01229');
@@ -146,15 +146,6 @@ CREATE TABLE `admins` (
 -- ----------------------------
 
 INSERT INTO `admins` VALUES ('16');
-INSERT INTO `admins` VALUES ('17');
-INSERT INTO `admins` VALUES ('18');
-INSERT INTO `admins` VALUES ('19');
-INSERT INTO `admins` VALUES ('20');
-INSERT INTO `admins` VALUES ('21');
-INSERT INTO `admins` VALUES ('22');
-INSERT INTO `admins` VALUES ('23');
-INSERT INTO `admins` VALUES ('24');
-INSERT INTO `admins` VALUES ('25');
 
 -- ----------------------------
 -- Table structure for groups
@@ -175,15 +166,14 @@ CREATE TABLE `groups` (
 
 INSERT INTO `groups` (`group_id`, `name`, `description`, `mentor_grade_req`, `mentee_grade_req`) 
 VALUES (NULL, 'Group1', 'Group1', '4', '4');
-INSERT INTO `groups` VALUES (NULL, 'Group2', 'Group2', '5', '4');
-INSERT INTO `groups` VALUES (NULL, 'Group3', 'Group3', '6', '5');
-INSERT INTO `groups` VALUES (NULL, 'Group4', 'Group4', '7', '6');
-INSERT INTO `groups` VALUES (NULL, 'Group5', 'Group5', '8', '7');
-INSERT INTO `groups` VALUES (NULL, 'Group6', 'Group6', '4', '8');
-INSERT INTO `groups` VALUES (NULL, 'Group7', 'Group7', '5', '8');
-INSERT INTO `groups` VALUES (NULL, 'Group8', 'Group8', '6', '8');
-INSERT INTO `groups` VALUES (NULL, 'Group9', 'Group9', '7', '8');
-INSERT INTO `groups` VALUES (NULL, 'Group10', 'Group10', '8', '8');
+INSERT INTO `groups` VALUES ('006', 'Group6', 'Group2', '7', '6');
+INSERT INTO `groups` VALUES ('007', 'Group7', 'Group3', '8', '7');
+INSERT INTO `groups` VALUES ('008', 'Group8', 'Group4', '9', '8');
+INSERT INTO `groups` VALUES ('009', 'Group9', 'Group5', '10', '9');
+INSERT INTO `groups` VALUES ('010', 'Group10', 'Group6', '11', '10');
+INSERT INTO `groups` VALUES ('011', 'Group11', 'Group7', '12', '11');
+INSERT INTO `groups` VALUES ('012', 'Group12', 'Group8', '12', '12');
+
 
 -- ----------------------------
 -- Table structure for time_slot
@@ -238,15 +228,15 @@ CREATE TABLE `meetings` (
 
 INSERT INTO `meetings` (`meet_id`, `meet_name`, `date`, `time_slot_id`, `capacity`, `announcement`, `group_id`) 
 VALUES (NULL, 'Wack', '2021-03-01', '7', '8', 'Welcome', '1');
-INSERT INTO `meetings` VALUES (NULL, 'Wack', '2021-03-02', '8', '8', 'Welcome', '2');
-INSERT INTO `meetings` VALUES (NULL, 'Wack', '2021-03-03', '9', '8', 'Welcome', '3');
-INSERT INTO `meetings` VALUES (NULL, 'Wack', '2021-03-04', '10', '8', 'Welcome', '4');
-INSERT INTO `meetings` VALUES (NULL, 'Wack', '2021-03-05', '11', '8', 'Welcome', '5');
-INSERT INTO `meetings` VALUES (NULL, 'Wack', '2021-03-01', '12', '8', 'Welcome', '6');
-INSERT INTO `meetings` VALUES (NULL, 'Wack', '2021-03-02', '13', '8', 'Welcome', '7');
-INSERT INTO `meetings` VALUES (NULL, 'Wack', '2021-03-03', '14', '8', 'Welcome', '8');
-INSERT INTO `meetings` VALUES (NULL, 'Wack', '2021-03-04', '15', '8', 'Welcome', '9');
-INSERT INTO `meetings` VALUES (NULL, 'Wack', '2021-03-05', '16', '8', 'Welcome', '10');
+INSERT INTO `meetings` VALUES (NULL, 'Math', '2021-03-02', '8', '8', 'Welcome to math', '006');
+INSERT INTO `meetings` VALUES (NULL, 'Science', '2021-03-02', '8', '8', 'Welcome to science', '006');
+INSERT INTO `meetings` VALUES (NULL, 'Math', '2021-03-03', '9', '8', 'Welcome to math', '007');
+INSERT INTO `meetings` VALUES (NULL, 'Science', '2021-03-03', '9', '8', 'Welcome to science', '007');
+INSERT INTO `meetings` VALUES (NULL, 'Language Arts', '2021-03-04', '10', '8', 'Welcome to LA', '008');
+INSERT INTO `meetings` VALUES (NULL, 'Biology', '2021-03-05', '11', '8', 'Welcome to Bio', '009');
+INSERT INTO `meetings` VALUES (NULL, 'Chemistry', '2021-03-01', '12', '8', 'Welcome to chem', '010');
+INSERT INTO `meetings` VALUES (NULL, 'Computer Science', '2021-03-02', '13', '8', 'Welcome to CS', '011');
+INSERT INTO `meetings` VALUES (NULL, 'Calc', '2021-03-03', '14', '8', 'Welcome to calc', '012');
 
 -- ----------------------------
 -- Table structure for material
