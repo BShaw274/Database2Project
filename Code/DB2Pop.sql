@@ -145,7 +145,7 @@ CREATE TABLE `admins` (
 -- Data for admins
 -- ----------------------------
 
-INSERT INTO `admins` VALUES ('16');
+INSERT INTO `admins` VALUES ('1');
 
 -- ----------------------------
 -- Table structure for groups

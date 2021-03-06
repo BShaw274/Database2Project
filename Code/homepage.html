@@ -4,15 +4,40 @@
 </head>
 <body>
 <h1>Sunny Youth Club</h1>
-<h2>User Registration</h2>
+<h2>Login/User Registration</h2>
 
+<!-- Log in form -->
+<form action="userLogin.php" method="post">
+<table border="0">
+<tr bgcolor="#cccccc">
+    <td width="150">Input User Information</td>
+<tr>
+  <!-- user enters email -->
+  <td>Email</td>
+  <td align="left"><input type="email" name="userEmail" size="20" maxlength="30"/></td>
+</tr>
+
+<!-- users enters password -->
+<tr>
+  <td>Password</td>
+  <td align="left"><input type="text" name="userPassword" size="20" maxlength="30"/></td>
+</tr>
+<!-- log in button -->
+<tr>
+<td colspan="2" align="center"><input type="submit" value="Log in"/></td>
+</tr>
+</table>
+</form>
+<!-- students registration which re-directs to student register webpage -->
 <a href="userSignupStudent.html">
    <button>Student Registration</button>
 </a>
-
+<!-- parent registration which re-directs to parent register webpage -->
 <a href="userSignupParent.html">
    <button>Parent Registration</button>
 </a>
+
+
 
 </body>
 </html>
