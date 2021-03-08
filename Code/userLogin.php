@@ -59,6 +59,11 @@ if ($_POST['userPassword'] === $userPassword) {
   //and ["id"] selects the first value in the associative array aka the id we want
   //echo " |".$id."| ";  // checking id is grabbed correctly
 
+  // Setting a session variable as id so that this id may be grabbed by other php files
+  session_start();
+  $_SESSION['passedId'] = $id;
+
+
   //Check if id is an admin id
   $stmt = $dbConnection->prepare("SELECT admin_id FROM admins Where admin_id = ?");
   if(false ===$stmt){
@@ -105,14 +110,14 @@ elseif(empty($exampleArray1)){
   if(!(empty($exampleArray1))){
     echo"log in as parent";
     //Log in as parent
-    header("Location: sample.php");
+    header("Location: parentUpdate.html");
       // replace the above code The "sample2.html" with the login page for Parents
   }
   // if array was emnpty it must be a student id
   elseif(empty($exampleArray1)){
   //log in as child
   echo" Log in as student";
-  header("Location: sample2.html");
+  header("Location:studentLogin.html");
   // replace the above code The "sample2.html" with the login page for Students
 }
 //the file redirection is the header(...) currently on lines 81 108 115
