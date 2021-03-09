@@ -235,10 +235,10 @@ INSERT INTO `meetings` VALUES (NULL, 'Science', '2021-03-02', '8', '8', 'Welcome
 INSERT INTO `meetings` VALUES (NULL, 'Math', '2021-03-03', '9', '8', 'Welcome to math', '007');
 INSERT INTO `meetings` VALUES (NULL, 'Science', '2021-03-03', '9', '8', 'Welcome to science', '007');
 INSERT INTO `meetings` VALUES (NULL, 'Language Arts', '2021-03-04', '10', '8', 'Welcome to LA', '008');
+INSERT INTO `meetings` VALUES (NULL, 'Algebra', '2021-03-04', '10', '8', 'Welcome to Algebra', '008');
 INSERT INTO `meetings` VALUES (NULL, 'Biology', '2021-03-05', '11', '8', 'Welcome to Bio', '009');
-INSERT INTO `meetings` VALUES (NULL, 'Chemistry', '2021-03-01', '12', '8', 'Welcome to chem', '010');
-INSERT INTO `meetings` VALUES (NULL, 'Computer Science', '2021-03-02', '13', '8', 'Welcome to CS', '011');
-INSERT INTO `meetings` VALUES (NULL, 'Calc', '2021-03-03', '14', '8', 'Welcome to calc', '012');
+INSERT INTO `meetings` VALUES (NULL, 'Geometry', '2021-03-05', '11', '8', 'Welcome to Geometry', '009');
+
 
 -- ----------------------------
 -- Table structure for material
