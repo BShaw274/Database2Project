@@ -184,7 +184,8 @@ CREATE TABLE `time_slot` (
   `day_of_the_week` varchar(255) NOT NULL,
   `start_time` time NOT NULL,
   `end_time` time NOT NULL,
-  PRIMARY KEY (`time_slot_id`)
+  PRIMARY KEY (`time_slot_id`),
+  CONSTRAINT `TimeConstraint` CHECK (day_of_the_week = 'Saturday' OR day_of_the_week = 'Sunday')
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -192,16 +193,17 @@ CREATE TABLE `time_slot` (
 -- ----------------------------
 
 INSERT INTO `time_slot` (`time_slot_id`, `day_of_the_week`, `start_time`, `end_time`) 
-VALUES (NULL, 'Monday', '01:00:0', '02:00:00');
-INSERT INTO `time_slot` VALUES (NULL, 'Tuesday', '01:00:0', '02:00:00');
-INSERT INTO `time_slot` VALUES (NULL, 'Wednesday', '01:00:0', '02:00:00');
-INSERT INTO `time_slot` VALUES (NULL, 'Thursday', '01:00:0', '02:00:00');
-INSERT INTO `time_slot` VALUES (NULL, 'Friday', '01:00:0', '02:00:00');
-INSERT INTO `time_slot` VALUES (NULL, 'Monday', '04:00:0', '05:00:00');
-INSERT INTO `time_slot` VALUES (NULL, 'Tuesday', '04:00:0', '05:00:00');
-INSERT INTO `time_slot` VALUES (NULL, 'Wednesday', '04:00:0', '05:00:00');
-INSERT INTO `time_slot` VALUES (NULL, 'Thursday', '04:00:0', '05:00:00');
-INSERT INTO `time_slot` VALUES (NULL, 'Friday', '04:00:0', '05:00:00');
+VALUES (NULL, 'Saturday', '01:00:0', '02:00:00');
+INSERT INTO `time_slot` VALUES (NULL, 'Saturday', '01:00:0', '02:00:00');
+INSERT INTO `time_slot` VALUES (NULL, 'Saturday', '01:00:0', '02:00:00');
+INSERT INTO `time_slot` VALUES (NULL, 'Saturday', '01:00:0', '02:00:00');
+INSERT INTO `time_slot` VALUES (NULL, 'Saturday', '01:00:0', '02:00:00');
+INSERT INTO `time_slot` VALUES (NULL, 'Sunday', '04:00:0', '05:00:00');
+INSERT INTO `time_slot` VALUES (NULL, 'Sunday', '04:00:0', '05:00:00');
+INSERT INTO `time_slot` VALUES (NULL, 'Sunday', '04:00:0', '05:00:00');
+INSERT INTO `time_slot` VALUES (NULL, 'Sunday', '04:00:0', '05:00:00');
+INSERT INTO `time_slot` VALUES (NULL, 'Sunday', '04:00:0', '05:00:00');
+
 
 -- ----------------------------
 -- Table structure for meetings
