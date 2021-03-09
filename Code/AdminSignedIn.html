@@ -1,0 +1,66 @@
+<html>
+<head>
+  <title>Admin Meeting Creation</title>
+</head>
+<body>
+<h1>Admin Panel</h1>
+<h2>Create new Meeting</h2>
+
+<form action="AdminSignedIn.php" method="post">
+<table border="0">
+<tr bgcolor="#cccccc">
+  <td width="150">Create a Meeting</td>
+</tr>
+
+<tr>
+  <td>Meeting Name</td>
+  <td align="left"><input type="text" name="meetingName" size="20" maxlength="30"/></td>
+</tr>
+
+<tr>
+  <td>Meeting Date</td>
+  <td align="left"><input type="date" name="meetingDate" size="20" maxlength="30"/></td>
+</tr>
+
+<tr>
+  <td>Capacity</td>
+  <td align="center"><input type="number" name="meetingCapacity" size="20" maxlength="10"/></td>
+</tr>
+
+<tr>
+  <td>Announcement</td>
+  <td align="left"><input type="text" name="meetingAnnouncement" size="20" maxlength="30"/></td>
+</tr>
+
+</table>
+
+<!--this fails on 6-7pm. The timeslot needs updated for valid times but then this fix is simple -brian-->
+<p>Select Timeslot:</p>
+<input type="radio" id="6-7pm" name="meetingTimeSlot" value="006">
+<label for="6-7pm">6-7pm</label><br>
+<input type="radio" id="7-8pm" name="meetingTimeSlot" value="007">
+<label for="7-8pm">7-8pm</label><br>
+<input type="radio" id="8-9pm" name="meetingTimeSlot" value="008">
+<label for="8-9pm">8-9pm</label>
+
+
+<p>Select Group:</p>
+<input type="radio" id="6" name="meetingGroupId" value="006">
+<label for="6">6th Grade</label><br>
+<input type="radio" id="7" name="meetingGroupId" value="007">
+<label for="7">7th Grade</label><br>
+<input type="radio" id="8" name="meetingGroupId" value="008">
+<label for="8">8th Grade</label><br>
+<input type="radio" id="9" name="meetingGroupId" value="009">
+<label for="9">9th Grade</label>
+
+<br>
+
+<tr>
+  <td colspan="2" align="center"><input type="submit" value="Submit"/></td>
+</tr>
+
+</form>
+
+</body>
+</html>
