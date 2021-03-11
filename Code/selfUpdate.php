@@ -1,5 +1,7 @@
 <?php
+
 //This code is used for StudentLogin.html and parentUpdateStudent.php so users can update information. This file is ran off the click of a submit button.
+
 
 
 $userEmail = $_POST['userEmail'];
@@ -29,7 +31,9 @@ echo " Echoing Name update: ".$userName;
 
 //update the info
 //Update -- Email
+
 if (!empty($userEmail))
+
 {
 $stmt = $dbConnection->prepare("UPDATE users SET email = ? Where id = ?");
 if(false ===$stmt){
@@ -48,7 +52,9 @@ if(false ===$check){
 
 
 //Update -- Password
+
 if (!empty($userPassword))
+
 {
 $stmt = $dbConnection->prepare("UPDATE users SET password = ? Where id = ?");
 if(false ===$stmt){
@@ -66,7 +72,9 @@ if(false ===$check){
 }//Password Update Done
 
 //Update -- Name
+
 if (!empty($userName))
+
 {
 $stmt = $dbConnection->prepare("UPDATE users SET name = ? Where id = ?");
 if(false ===$stmt){
@@ -84,7 +92,9 @@ if(false ===$check){
 }//Name Update Done
 
 //Update -- Phone
+
 if (!empty($userPhone))
+
 {
 $stmt = $dbConnection->prepare("UPDATE users SET phone = ? Where id = ?");
 if(false ===$stmt){
@@ -104,5 +114,7 @@ if(false ===$check){
 
 
 //refreshs the page by gonig to same page, commented out for testing purposes
+
   //header("Location:studentLogin.html");
+
  ?>

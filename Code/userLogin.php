@@ -112,7 +112,9 @@ elseif(empty($exampleArray1)){
   if(!(empty($exampleArray1))){
     echo"log in as parent";
     //Log in as parent
+
     header("Location: parentLogin.php");
+
       // replace the above code The "sample2.html" with the login page for Parents
   }
   // if array was emnpty it must be a student id
