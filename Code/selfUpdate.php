@@ -1,11 +1,8 @@
 <?php
-// Getting info posted from userSignupStudent.html form action line 9
-/*
-$userEmail = 'null';
-$userPassword = 'null';
-$userName = 'null';
-$userPhone = 'null';
-*/
+
+//This code is used for StudentLogin.html and parentUpdateStudent.php so users can update information. This file is ran off the click of a submit button.
+
+
 
 $userEmail = $_POST['userEmail'];
 $userPassword = $_POST['userPassword'];
@@ -34,7 +31,9 @@ echo " Echoing Name update: ".$userName;
 
 //update the info
 //Update -- Email
-if (isset($userEmail))
+
+if (!empty($userEmail))
+
 {
 $stmt = $dbConnection->prepare("UPDATE users SET email = ? Where id = ?");
 if(false ===$stmt){
@@ -53,7 +52,9 @@ if(false ===$check){
 
 
 //Update -- Password
-if (isset($userPassword))
+
+if (!empty($userPassword))
+
 {
 $stmt = $dbConnection->prepare("UPDATE users SET password = ? Where id = ?");
 if(false ===$stmt){
@@ -71,7 +72,9 @@ if(false ===$check){
 }//Password Update Done
 
 //Update -- Name
-if (isset($userName))
+
+if (!empty($userName))
+
 {
 $stmt = $dbConnection->prepare("UPDATE users SET name = ? Where id = ?");
 if(false ===$stmt){
@@ -89,7 +92,9 @@ if(false ===$check){
 }//Name Update Done
 
 //Update -- Phone
-if (isset($userPhone))
+
+if (!empty($userPhone))
+
 {
 $stmt = $dbConnection->prepare("UPDATE users SET phone = ? Where id = ?");
 if(false ===$stmt){
@@ -109,5 +114,7 @@ if(false ===$check){
 
 
 //refreshs the page by gonig to same page, commented out for testing purposes
-  header("Location:studentLogin.html");
+
+  //header("Location:studentLogin.html");
+
  ?>
