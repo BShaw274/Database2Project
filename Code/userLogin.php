@@ -121,7 +121,7 @@ elseif(empty($exampleArray1)){
   elseif(empty($exampleArray1)){
   //log in as child
   echo" Log in as student";
-  header("Location:studentLogin.html");
+  header("Location:studentLogin.php");
   // replace the above code The "sample2.html" with the login page for Students
 }
 //the file redirection is the header(...) currently on lines 81 108 115
