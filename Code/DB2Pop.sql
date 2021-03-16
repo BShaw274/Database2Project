@@ -412,19 +412,3 @@ INSERT INTO `assign`  VALUES ('109', '21');
 
 
 SET FOREIGN_KEY_CHECKS = 1;
-
--- ----------------------------
--- Time Based Events
--- ----------------------------
-
--- activates event scheduler
-SET GLOBAL event_scheduler = ON;
-
-
-CREATE EVENT test_event_03
-ON SCHEDULE EVERY 1 MINUTE
-STARTS CURRENT_TIMESTAMP
-ENDS CURRENT_TIMESTAMP + INTERVAL 1 HOUR
-DO
-   INSERT INTO messages(message,created_at)
-   VALUES('Test MySQL recurring Event',NOW());
