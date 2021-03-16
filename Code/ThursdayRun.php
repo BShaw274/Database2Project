@@ -81,6 +81,7 @@ if (mysqli_query($myconnection, $sql)) {
 echo "<h3>Meetings that need mentors</h3>";
 $sql = "SELECT meet_id
 FROM enroll2
+Where meet_id IN (SELECT meet_id From enroll)
 GROUP BY meet_id
 having COUNT(mentor_id) < 2;";
 $result = mysqli_query($myconnection , $sql);
