@@ -1,4 +1,6 @@
 <?php
+//This file is for the login of any user. This verifies that you are a valid user and determines what login page you go to, IE: Admin/Student/Parent
+
 $userEmail = $_POST['userEmail'];
 $userPassword = $_POST['userPassword'];
 
@@ -110,14 +112,16 @@ elseif(empty($exampleArray1)){
   if(!(empty($exampleArray1))){
     echo"log in as parent";
     //Log in as parent
-    header("Location: parentUpdate.html");
+
+    header("Location: parentLogin.php");
+
       // replace the above code The "sample2.html" with the login page for Parents
   }
   // if array was emnpty it must be a student id
   elseif(empty($exampleArray1)){
   //log in as child
   echo" Log in as student";
-  header("Location:studentLogin.html");
+  header("Location:studentLogin.php");
   // replace the above code The "sample2.html" with the login page for Students
 }
 //the file redirection is the header(...) currently on lines 81 108 115
