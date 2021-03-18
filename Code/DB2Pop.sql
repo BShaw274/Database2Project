@@ -194,15 +194,22 @@ CREATE TABLE `time_slot` (
 
 INSERT INTO `time_slot` (`time_slot_id`, `day_of_the_week`, `start_time`, `end_time`) 
 VALUES (NULL, 'Saturday', '01:00:0', '02:00:00');
-INSERT INTO `time_slot` VALUES (NULL, 'Saturday', '01:00:0', '02:00:00');
-INSERT INTO `time_slot` VALUES (NULL, 'Saturday', '01:00:0', '02:00:00');
-INSERT INTO `time_slot` VALUES (NULL, 'Saturday', '01:00:0', '02:00:00');
-INSERT INTO `time_slot` VALUES (NULL, 'Saturday', '01:00:0', '02:00:00');
-INSERT INTO `time_slot` VALUES (NULL, 'Sunday', '04:00:0', '05:00:00');
-INSERT INTO `time_slot` VALUES (NULL, 'Sunday', '04:00:0', '05:00:00');
-INSERT INTO `time_slot` VALUES (NULL, 'Sunday', '04:00:0', '05:00:00');
-INSERT INTO `time_slot` VALUES (NULL, 'Sunday', '04:00:0', '05:00:00');
-INSERT INTO `time_slot` VALUES (NULL, 'Sunday', '04:00:0', '05:00:00');
+INSERT INTO `time_slot` VALUES (8, 'Saturday', '01:00:0', '02:00:00');
+INSERT INTO `time_slot` VALUES (9, 'Saturday', '02:00:0', '03:00:00');
+INSERT INTO `time_slot` VALUES (10, 'Saturday', '03:00:0', '04:00:00');
+INSERT INTO `time_slot` VALUES (11, 'Saturday', '04:00:0', '05:00:00');
+INSERT INTO `time_slot` VALUES (12, 'Saturday', '05:00:0', '06:00:00');
+INSERT INTO `time_slot` VALUES (13, 'Saturday', '06:00:0', '07:00:00');
+INSERT INTO `time_slot` VALUES (14, 'Saturday', '07:00:0', '08:00:00');
+INSERT INTO `time_slot` VALUES (15, 'Saturday', '08:00:0', '09:00:00');
+INSERT INTO `time_slot` VALUES (16, 'Sunday', '01:00:0', '02:00:00');
+INSERT INTO `time_slot` VALUES (17, 'Sunday', '02:00:0', '03:00:00');
+INSERT INTO `time_slot` VALUES (18, 'Sunday', '03:00:0', '04:00:00');
+INSERT INTO `time_slot` VALUES (19, 'Sunday', '04:00:0', '05:00:00');
+INSERT INTO `time_slot` VALUES (20, 'Sunday', '05:00:0', '06:00:00');
+INSERT INTO `time_slot` VALUES (21, 'Sunday', '06:00:0', '07:00:00');
+INSERT INTO `time_slot` VALUES (22, 'Sunday', '07:00:0', '08:00:00');
+INSERT INTO `time_slot` VALUES (23, 'Sunday', '08:00:0', '09:00:00');
 
 
 -- ----------------------------
