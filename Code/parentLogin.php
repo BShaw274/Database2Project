@@ -110,5 +110,106 @@ New Name:        <input type="text" id='name' name='userName' >
 New Phone Number:<input type="text" id='phoneNumber' name='userPhone' >
 <input type="submit" value="Submit">
 </form><br>
+
+<!--Assigning a mentor to a meeting-->
+<form action="ParentAssignMentor.php" method="post">
+<table border="0">
+<tr bgcolor="#cccccc">
+  <td width="150">Enroll your student to be a Mentor</td>
+</tr>
+
+<tr>
+  <td>Student Id</td>
+  <td align="left"><input type="number" name="studentId" size="20" maxlength="30"/></td>
+</tr>
+<tr>
+  <td>Meeting Id</td>
+  <td align="left"><input type="number" name="meetingId" size="20" maxlength="30"/></td>
+</tr>
+
+<tr>
+  <td colspan="2" align="center"><input type="submit" value="Submit"/></td>
+</tr>
+
+</form>
+</table>
+
+<!--Assigning a mentee to a meeting-->
+<form action="ParentAssignMentee.php" method="post">
+  <table border="0">
+  <tr bgcolor="#cccccc">
+    <td width="150">Enroll your student to be a Mentee</td>
+  </tr>
+
+  <tr>
+    <td>Student Id</td>
+    <td align="left"><input type="number" name="studentId" size="20" maxlength="30"/></td>
+  </tr>
+  <tr>
+    <td>Meeting Id</td>
+    <td align="left"><input type="number" name="meetingId" size="20" maxlength="30"/></td>
+  </tr>
+
+  <tr>
+    <td colspan="2" align="center"><input type="submit" value="Submit"/></td>
+  </tr>
+  </form>
+</table>
+<!-- Meeting html stuff -->
+<h3>Meeting Information</h3>
+<!-- Here I need to dispaly Meetings and infor for them -->
+<?php
+// Old code from ParentLogin that needs to be adapted
+//Opening Connection
+$dbConnection = new mysqli('localhost', 'root', '', 'db2');
+if ($dbConnection->connect_error) {
+  die("Connection failed: " . $dbConnection->connect_error);
+}
+//Gid stands for get id of whos ever logged in
+//session_start();
+//$gid = $_SESSION['passedId'];
+
+$stmt = $dbConnection->prepare("SELECT * from meetings");
+if(false ===$stmt){
+  die('prepare() failed: ' . htmlspecialchars($mysqli->error));
+}
+/*
+$check = $stmt->bind_param("s", $arrayOfStudents[$i]['student_id']);
+if(false ===$check){
+  die('bind_param() failed: ' . htmlspecialchars($stmt->error));
+}
+*/
+$check = $stmt->execute();
+if(false ===$check){
+  die('execute() failed: ' . htmlspecialchars($stmt->error));
+}
+
+$meetingInfoArr= $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+//var_dump($meetingInfoArr);
+
+  for($i=0; $i<10; $i++){
+  echo "Meeting # ".$i+1;
+  echo " ";
+  echo " Meet_ID: ".$meetingInfoArr[$i]['meet_id'];
+  echo " ";
+  echo " Meeting Name: ".$meetingInfoArr[$i]['meet_name'];
+  echo " ";
+  echo " Date: ".$meetingInfoArr[$i]['date'];
+  echo " ";
+  echo " Time Slot ID: ".$meetingInfoArr[$i]['time_slot_id'];
+  echo " ";
+  echo " Capacity: ".$meetingInfoArr[$i]['capacity'];
+  echo "";
+  echo " Announcement: ".$meetingInfoArr[$i]['announcement'];
+  echo "";
+  echo " Group ID: ".$meetingInfoArr[$i]['group_id'];
+  echo "";
+  ?>
+  <br>
+  <br>
+  <?php
+}
+//$stmt->close();
+?>
 </body>
 </html>
