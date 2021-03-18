@@ -20,7 +20,7 @@ if ($dbConnection->connect_error) {
 //then pushes the query to the Database with Execute()
 $stmt = $dbConnection->prepare("INSERT INTO meetings (meet_name, date, time_slot_id, capacity, announcement, group_id) VALUES (?, ?, ?, ?, ?, ?)");
 if(false ===$stmt){
-  die('prepare() failed: ' . htmlspecialchars($mysqli->error));
+  die('prepare() failed: ' . htmlspecialchars($stmt->error));
 }
 $check = $stmt->bind_param("ssssss", $meetingName, $meetingDate, $meetingTimeSlot, $meetingCapacity, $meetingAnnouncement, $meetingGroupId);
 if(false ===$check){
