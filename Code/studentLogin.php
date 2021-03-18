@@ -22,6 +22,43 @@ Phone Number:<input type="text" id='phoneNumber' name='userPhone'>
 <input type="submit"><br>
 </form>
 
+<h3>Signup Information</h3>
+
+<!--Assigning a mentor to a meeting-->
+<form action="StudentAssignMentor.php" method="post">
+<table border="0">
+<tr bgcolor="#cccccc">
+  <td width="150">Sign up as Mentor</td>
+</tr>
+<tr>
+  <td>Meeting Id</td>
+  <td align="left"><input type="number" name="meetingId" size="20" maxlength="30"/></td>
+</tr>
+
+<tr>
+  <td colspan="2" align="center"><input type="submit" value="Submit"/></td>
+</tr>
+</table>
+</form>
+
+<!--Assigning a mentee to a meeting-->
+<form action="StudentAssignMentee.php" method="post">
+  <table border="0">
+  <tr bgcolor="#cccccc">
+    <td width="150">Sign up as Mentee</td>
+  </tr>
+  <tr>
+    <td>Meeting Id</td>
+    <td align="left"><input type="number" name="meetingId" size="20" maxlength="30"/></td>
+  </tr>
+
+  <tr>
+    <td colspan="2" align="center"><input type="submit" value="Submit"/></td>
+  </tr>
+</table>
+  </form>
+
+
 <h3>Meeting Information</h3>
 <!-- Here I need to dispaly Meetings and infor for them -->
 <?php
@@ -75,10 +112,10 @@ $meetingInfoArr= $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
   <br>
   <?php
 }
-
-
 //$stmt->close();
-
 ?>
+
+
+
 </body>
 </html>
