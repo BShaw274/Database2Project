@@ -58,30 +58,147 @@ Phone Number:<input type="text" id='phoneNumber' name='userPhone'>
 </table>
   </form>
 
+<h3>Participants of Mentor Meetings </h3>
+<?php
+$dbConnection = new mysqli('localhost', 'root', '', 'db2');
+if ($dbConnection->connect_error) {
+  die("Connection failed: " . $dbConnection->connect_error);
+}
+session_start();
+$gid = $_SESSION['passedId'];
+//Gid stands for get id of whos ever logged in
 
+//Get the Meeting ID of meetings the logged in user is Mentoring for
+$stmt = $dbConnection->prepare("SELECT meet_id FROM enroll2 Where mentor_id = ?");
+if(false ===$stmt){
+  die('prepare() failed: ' . htmlspecialchars($mysqli->error));
+}
+$check = $stmt->bind_param("s", $gid);
+if(false ===$check){
+  die('bind_param() failed: ' . htmlspecialchars($stmt->error));
+}
+$check = $stmt->execute();
+if(false ===$check){
+  die('execute() failed: ' . htmlspecialchars($stmt->error));
+}
+
+//Gets all meetings Id incase you mentor multiple meetings
+$MeetIdResult = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+ $stmt->close();
+ if(!(empty($MeetIdResult))){
+
+for($j=0; $j<count($MeetIdResult);$j++){
+  //For loop will go through and print out mentors and mentees information for 1 specific meetings
+  // before incrementing and checknig the next meeting untill there are no more meet_id's in $MeetIdResult
+  ?><br><?php
+  echo "Meet id: ".$MeetIdResult[$j]["meet_id"];
+  $stmt = $dbConnection->prepare("SELECT mentor_id FROM enroll2 Where meet_id = ? AND mentor_id != ?");
+  if(false ===$stmt){
+    die('prepare() failed: ' . htmlspecialchars($mysqli->error));
+  }
+  $check = $stmt->bind_param("ss", $MeetIdResult[$j]["meet_id"], $gid);
+  if(false ===$check){
+    die('bind_param() failed: ' . htmlspecialchars($stmt->error));
+  }
+  $check = $stmt->execute();
+  if(false ===$check){
+    die('execute() failed: ' . htmlspecialchars($stmt->error));
+  }
+  $MentorIdResult = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+  $stmt->close();
+  //Gets mentor ID's for meeting we are checking so we can then query the info of those mentors
+  if(!(empty($MentorIdResult))){
+      ?><br><?php
+    echo"Mentors:";
+
+    for($i=0; $i<count($MentorIdResult); $i++){
+
+      $stmt = $dbConnection->prepare("SELECT name, email  FROM users Where id= ?");
+      if(false ===$stmt){
+        die('prepare() failed: ' . htmlspecialchars($mysqli->error));
+      }
+      $check = $stmt->bind_param("s", $MentorIdResult[$i]["mentor_id"]);
+      if(false ===$check){
+        die('bind_param() failed: ' . htmlspecialchars($stmt->error));
+      }
+      $check = $stmt->execute();
+      if(false ===$check){
+        die('execute() failed: ' . htmlspecialchars($stmt->error));
+      }
+      $MentorInfoResult = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+      $stmt->close();
+      //var_dump($MentorInfoResult);
+      ?><br><?php
+      for($k=0; $k<count($MentorInfoResult);$k++){
+        //echo"Inside Test";
+        echo" Name: ".$MentorInfoResult[$k]["name"].", Email: ".$MentorInfoResult[$k]["email"];
+      }
+    }
+    //The above then prints the Name and Email for the mentor id's obtained in $MentorIdResult
+  }//Mentor ID Result isempty Close
+// We now swap gears and check mentees for the same Meeting ID
+?><br><?php
+echo"Mentees: ";
+$stmt = $dbConnection->prepare("SELECT mentee_id FROM enroll Where meet_id = ? AND mentee_id != ?");
+if(false ===$stmt){
+  die('prepare() failed: ' . htmlspecialchars($mysqli->error));
+}
+$check = $stmt->bind_param("ss", $MeetIdResult[$j]["meet_id"],$gid);
+if(false ===$check){
+  die('bind_param() failed: ' . htmlspecialchars($stmt->error));
+}
+$check = $stmt->execute();
+if(false ===$check){
+  die('execute() failed: ' . htmlspecialchars($stmt->error));
+}
+$MenteeIdResult = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+$stmt->close();
+//Gets the Mentee id's so that we may print out mentee info that are contained in $MentorIdResult
+  if(!(empty($MenteeIdResult))){ //Checks that there are mentee IDs
+    for($i=0; $i<count($MenteeIdResult); $i++){
+
+      $stmt = $dbConnection->prepare("SELECT name, email  FROM users Where id= ?");
+      if(false ===$stmt){
+        die('prepare() failed: ' . htmlspecialchars($mysqli->error));
+      }
+      $check = $stmt->bind_param("s", $MenteeIdResult[$i]["mentee_id"]);
+      if(false ===$check){
+        die('bind_param() failed: ' . htmlspecialchars($stmt->error));
+      }
+      $check = $stmt->execute();
+      if(false ===$check){
+        die('execute() failed: ' . htmlspecialchars($stmt->error));
+      }
+      $MenteeInfoResult = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+      $stmt->close();
+      ?><br><?php
+      for($k=0; $k<count($MenteeInfoResult);$k++){
+        echo" Name: ".$MenteeInfoResult[$k]["name"].", Email: ".$MenteeInfoResult[$k]["email"];
+      }
+    }
+  // The above prints out the name and Email of the mentee id's contained in $MentorIdResult
+  //by querying and storing that info in $MenteeInfoResult then printing in the for loop
+  }//Mentee ID Result isempty Close
+}// closes for loop cheching all meetings they are a mentor off
+//now get mentee id for same meeting
+} //this is the closing bracked for checking if $MeetIdResult is not Empty
+?>
 <h3>Meeting Information</h3>
 <!-- Here I need to dispaly Meetings and infor for them -->
 <?php
 // Old code from ParentLogin that needs to be adapted
 //Opening Connection
+/*
 $dbConnection = new mysqli('localhost', 'root', '', 'db2');
 if ($dbConnection->connect_error) {
   die("Connection failed: " . $dbConnection->connect_error);
 }
-//Gid stands for get id of whos ever logged in
-//session_start();
-//$gid = $_SESSION['passedId'];
+*/ //No need for 2 connections
 
 $stmt = $dbConnection->prepare("SELECT * from meetings");
 if(false ===$stmt){
   die('prepare() failed: ' . htmlspecialchars($mysqli->error));
 }
-/*
-$check = $stmt->bind_param("s", $arrayOfStudents[$i]['student_id']);
-if(false ===$check){
-  die('bind_param() failed: ' . htmlspecialchars($stmt->error));
-}
-*/
 $check = $stmt->execute();
 if(false ===$check){
   die('execute() failed: ' . htmlspecialchars($stmt->error));
