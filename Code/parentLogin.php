@@ -110,5 +110,96 @@ New Name:        <input type="text" id='name' name='userName' >
 New Phone Number:<input type="text" id='phoneNumber' name='userPhone' >
 <input type="submit" value="Submit">
 </form><br>
+
+<!--Assigning a mentor to a meeting-->
+<form action="ParentAssignMentor.php" method="post">
+<table border="0">
+<tr bgcolor="#cccccc">
+  <td width="150">Enroll your student to be a Mentor</td>
+</tr>
+
+<tr>
+  <td>Student Id</td>
+  <td align="left"><input type="number" name="studentId" size="20" maxlength="30"/></td>
+</tr>
+<tr>
+  <td>Meeting Id</td>
+  <td align="left"><input type="number" name="meetingId" size="20" maxlength="30"/></td>
+</tr>
+
+<tr>
+  <td colspan="2" align="center"><input type="submit" value="Submit"/></td>
+</tr>
+
+</form>
+</table>
+
+<!--Assigning a mentee to a meeting-->
+<form action="ParentAssignMentee.php" method="post">
+  <table border="0">
+  <tr bgcolor="#cccccc">
+    <td width="150">Enroll your student to be a Mentee</td>
+  </tr>
+
+  <tr>
+    <td>Student Id</td>
+    <td align="left"><input type="number" name="studentId" size="20" maxlength="30"/></td>
+  </tr>
+  <tr>
+    <td>Meeting Id</td>
+    <td align="left"><input type="number" name="meetingId" size="20" maxlength="30"/></td>
+  </tr>
+
+  <tr>
+    <td colspan="2" align="center"><input type="submit" value="Submit"/></td>
+  </tr>
+  </form>
+</table>
+<!-- Meeting html stuff -->
+<h3>Meeting Information</h3>
+<!-- Here I need to dispaly Meetings and infor for them -->
+<?php
+// Old code from ParentLogin that needs to be adapted
+//Opening Connection
+$dbConnection = new mysqli('localhost', 'root', '', 'db2');
+if ($dbConnection->connect_error) {
+  die("Connection failed: " . $dbConnection->connect_error);
+}
+//Gid stands for get id of whos ever logged in
+//session_start();
+//$gid = $_SESSION['passedId'];
+
+$sql = "SELECT * from meetings";
+$result = mysqli_query($dbConnection , $sql);
+
+if (mysqli_num_rows($result) > 0) {
+  // output data of each row
+  echo "<p> ";
+  $i = 1;
+  while($row = mysqli_fetch_assoc($result)) {
+    echo "Meeting # ".$i ++;
+    echo " ";
+    echo " Meet_ID: ". $row['meet_id'];
+    echo " ";
+    echo " Meeting Name: ".$row['meet_name'];
+    echo " ";
+    echo " Date: ".$row['date'];
+    echo " ";
+    echo " Time Slot ID: ".$row['time_slot_id'];
+    echo " ";
+    echo " Capacity: ".$row['capacity'];
+    echo "";
+    echo " Announcement: ".$row['announcement'];
+    echo "";
+    echo " Group ID: ".$row['group_id'];
+    echo "";
+    echo "<br>";
+
+  }
+  echo " </p> ";
+} else {
+  echo "0 results";
+}
+?>
 </body>
 </html>
