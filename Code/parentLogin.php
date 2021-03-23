@@ -200,5 +200,6 @@ if (mysqli_num_rows($result) > 0) {
 } else {
   echo "0 results";
 }
+?>
 </body>
 </html>
