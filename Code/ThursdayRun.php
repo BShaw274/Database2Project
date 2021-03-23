@@ -64,18 +64,18 @@ if (mysqli_num_rows($result) > 0) {
 }
 
 // Gets rid of the empty meeetings 
-$sql = "DELETE
-FROM enroll
-Where meet_id IN (SELECT meet_id
-FROM enroll
-GROUP BY meet_id
-having COUNT(mentee_id) < 3);";
+// $sql = "DELETE
+// FROM enroll
+// Where meet_id IN (SELECT meet_id
+// FROM enroll
+// GROUP BY meet_id
+// having COUNT(mentee_id) < 3);";
 
-if (mysqli_query($myconnection, $sql)) {
-  echo "Empty meetings deleted successfully";
-} else {
-  echo "Error deleting empty metings: " . mysqli_error($myconnection);
-}
+// if (mysqli_query($myconnection, $sql)) {
+//   echo "Empty meetings deleted successfully";
+// } else {
+//   echo "Error deleting empty metings: " . mysqli_error($myconnection);
+// }
 
 // prints out meetings that need more mentors
 echo "<h3>Meetings that need mentors</h3>";
