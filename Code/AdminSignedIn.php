@@ -148,6 +148,32 @@
   
 </form>
 </table>
+
+<form action="AdminAssignStudyMaterials.php" method="post">
+<table border="0">
+<tr bgcolor="#cccccc">
+  <td width="150">Add Study Materials to a meeting</td>
+</tr>
+  
+<tr>
+  <td>Study Materials Id</td>
+  <td align="left"><input type="number" name="studymatId" size="20" maxlength="30"/></td>
+</tr>
+<tr>
+  <td>Meeting Id</td>
+  <td align="left"><input type="number" name="meetingId" size="20" maxlength="30"/></td>
+</tr>
+  
+<tr>
+  <td colspan="2" align="center"><input type="submit" value="Submit"/></td>
+</tr>
+  
+</form>
+</table>
+
+
+
+
 <?php
 // Old code from ParentLogin that needs to be adapted
 //Opening Connection
