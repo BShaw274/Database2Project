@@ -195,41 +195,39 @@ if ($dbConnection->connect_error) {
 }
 */ //No need for 2 connections
 
-$stmt = $dbConnection->prepare("SELECT * from meetings");
-if(false ===$stmt){
-  die('prepare() failed: ' . htmlspecialchars($mysqli->error));
-}
-$check = $stmt->execute();
-if(false ===$check){
-  die('execute() failed: ' . htmlspecialchars($stmt->error));
+$sql = "SELECT * from meetings";
+$result = mysqli_query($dbConnection , $sql);
+
+if (mysqli_num_rows($result) > 0) {
+  // output data of each row
+  echo "<p> ";
+  $i = 1;
+  while($row = mysqli_fetch_assoc($result)) {
+    echo "Meeting # ".$i ++;
+    echo " ";
+    echo " Meet_ID: ". $row['meet_id'];
+    echo " ";
+    echo " Meeting Name: ".$row['meet_name'];
+    echo " ";
+    echo " Date: ".$row['date'];
+    echo " ";
+    echo " Time Slot ID: ".$row['time_slot_id'];
+    echo " ";
+    echo " Capacity: ".$row['capacity'];
+    echo "";
+    echo " Announcement: ".$row['announcement'];
+    echo "";
+    echo " Group ID: ".$row['group_id'];
+    echo "";
+    echo "<br>";
+
+  }
+  echo " </p> ";
+} else {
+  echo "0 results";
 }
 
-$meetingInfoArr= $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-//var_dump($meetingInfoArr);
 
-  for($i=0; $i<10; $i++){
-  echo "Meeting # ".$i+1;
-  echo " ";
-  echo " Meet_ID: ".$meetingInfoArr[$i]['meet_id'];
-  echo " ";
-  echo " Meeting Name: ".$meetingInfoArr[$i]['meet_name'];
-  echo " ";
-  echo " Date: ".$meetingInfoArr[$i]['date'];
-  echo " ";
-  echo " Time Slot ID: ".$meetingInfoArr[$i]['time_slot_id'];
-  echo " ";
-  echo " Capacity: ".$meetingInfoArr[$i]['capacity'];
-  echo "";
-  echo " Announcement: ".$meetingInfoArr[$i]['announcement'];
-  echo "";
-  echo " Group ID: ".$meetingInfoArr[$i]['group_id'];
-  echo "";
-  ?>
-  <br>
-  <br>
-  <?php
-}
-//$stmt->close();
 ?>
 
 
