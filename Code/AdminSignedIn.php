@@ -118,7 +118,14 @@
   <td>Meeting Id</td>
   <td align="left"><input type="number" name="meetingId" size="20" maxlength="30"/></td>
 </tr>
-
+<tr>
+  <td colspan="2" align="center">
+  <input type="radio" id="Single" name="MentorSelect" value="single" required>
+  <label for="single">Single</label>
+  <input type="radio" id="Reoccuring" name="MentorSelect" value="Reoccuring">
+  <label for="Reoccuring">Reoccuring</label>
+  </td>
+</tr>
 <tr>
   <td colspan="2" align="center"><input type="submit" value="Submit"/></td>
 </tr>
@@ -132,7 +139,7 @@
 <tr bgcolor="#cccccc">
   <td width="150">Enroll a Mentee</td>
 </tr>
-  
+
 <tr>
   <td>Student Id</td>
   <td align="left"><input type="number" name="studentId" size="20" maxlength="30"/></td>
@@ -141,11 +148,18 @@
   <td>Meeting Id</td>
   <td align="left"><input type="number" name="meetingId" size="20" maxlength="30"/></td>
 </tr>
-  
+<tr>
+  <td colspan="2" align="center">
+  <input type="radio" id="Single" name="MenteeSelect" value="single" required>
+  <label for="single">Single</label>
+  <input type="radio" id="Reoccuring" name="MenteeSelect" value="Reoccuring">
+  <label for="Reoccuring">Reoccuring</label>
+</td>
+</tr>
 <tr>
   <td colspan="2" align="center"><input type="submit" value="Submit"/></td>
 </tr>
-  
+
 </form>
 </table>
 
@@ -154,7 +168,7 @@
 <tr bgcolor="#cccccc">
   <td width="150">Add Study Materials to a meeting</td>
 </tr>
-  
+
 <tr>
   <td>Study Materials Id</td>
   <td align="left"><input type="number" name="studymatId" size="20" maxlength="30"/></td>
@@ -163,11 +177,11 @@
   <td>Meeting Id</td>
   <td align="left"><input type="number" name="meetingId" size="20" maxlength="30"/></td>
 </tr>
-  
+
 <tr>
   <td colspan="2" align="center"><input type="submit" value="Submit"/></td>
 </tr>
-  
+
 </form>
 </table>
 
