@@ -34,7 +34,14 @@ Phone Number:<input type="text" id='phoneNumber' name='userPhone'>
   <td>Meeting Id</td>
   <td align="left"><input type="number" name="meetingId" size="20" maxlength="30"/></td>
 </tr>
-
+<tr>
+  <td colspan="2" align="center">
+  <input type="radio" id="Single" name="MentorSelect" value="single" required>
+  <label for="single">Single</label>
+  <input type="radio" id="Reoccuring" name="MentorSelect" value="Reoccuring">
+  <label for="Reoccuring">Reoccuring</label>
+</td>
+</tr>
 <tr>
   <td colspan="2" align="center"><input type="submit" value="Submit"/></td>
 </tr>
@@ -52,7 +59,17 @@ Phone Number:<input type="text" id='phoneNumber' name='userPhone'>
     <td align="left"><input type="number" name="meetingId" size="20" maxlength="30"/></td>
   </tr>
 
+<tr>
+  <td colspan="2" align="center">
+    <input type="radio" id="Single" name="MenteeSelect" value="single" required>
+  <label for="Single">Single</label>
+  <input type="radio" id="Reoccuring" name="MenteeSelect" value="Reoccuring">
+  <label for="Reoccuring">Reoccuring</label>
+</td>
+</tr>
+
   <tr>
+
     <td colspan="2" align="center"><input type="submit" value="Submit"/></td>
   </tr>
 </table>
