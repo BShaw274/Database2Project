@@ -8,6 +8,37 @@
 <h1>Sunny Youth Club</h1>
 <h2>Student's  Page </h2>
 
+<?php
+$myconnection = new mysqli('localhost', 'root', '', 'db2');
+if ($myconnection->connect_error) {
+  die("Connection failed: " . $myconnection->connect_error);
+}
+session_start();
+$gid = $_SESSION['passedId'];
+
+// prints out student information
+echo "<h3>Student Information</h3>";
+$sql = "SELECT email, password, name, phone
+FROM users
+WHERE id = " .$gid.";";
+$result = mysqli_query($myconnection , $sql);
+
+if (mysqli_num_rows($result) > 0) {
+  // output data of each row
+  echo "<p> ";
+  while($row = mysqli_fetch_assoc($result)) {
+    echo "Email: " . $row["email"]. "<br>";
+    echo "Password: " . $row["password"]. "<br>" ;
+    echo "Name: " . $row["name"]. "<br>";
+    echo "Phone: " . $row["phone"]. "<br>";
+  }
+  echo " </p> ";
+} else {
+  echo "0 results";
+}
+
+?>
+
 <h3>Update Account Information</h3>
 <p>Fill in the fields with the updated information and sumbit to update your profile! </p>
 <br>
@@ -75,13 +106,64 @@ Phone Number:<input type="text" id='phoneNumber' name='userPhone'>
 </table>
   </form>
 
+<h3>Signout Information</h3>
+<!--Removing a mentor from a meeting-->
+<form action="StudentRemoveMentor.php" method="post">
+<table border="0">
+<tr bgcolor="#cccccc">
+  <td width="150">Stop Mentorship</td>
+</tr>
+<tr>
+  <td>Meeting Id</td>
+  <td align="left"><input type="number" name="meetingId" size="20" maxlength="30"/></td>
+</tr>
+<tr>
+  <td colspan="2" align="center">
+  <input type="radio" id="Single" name="MentorSelect" value="single" required>
+  <label for="single">Single</label>
+  <input type="radio" id="Reoccuring" name="MentorSelect" value="Reoccuring">
+  <label for="Reoccuring">Reoccuring</label>
+</td>
+</tr>
+<tr>
+  <td colspan="2" align="center"><input type="submit" value="Submit"/></td>
+</tr>
+</table>
+</form>
+
+<!--Removing a mentee from a meeting-->
+<form action="StudentRemoveMentee.php" method="post">
+  <table border="0">
+  <tr bgcolor="#cccccc">
+    <td width="150">Stop Menteeship</td>
+  </tr>
+  <tr>
+    <td>Meeting Id</td>
+    <td align="left"><input type="number" name="meetingId" size="20" maxlength="30"/></td>
+  </tr>
+
+<tr>
+  <td colspan="2" align="center">
+    <input type="radio" id="Single" name="MenteeSelect" value="single" required>
+  <label for="Single">Single</label>
+  <input type="radio" id="Reoccuring" name="MenteeSelect" value="Reoccuring">
+  <label for="Reoccuring">Reoccuring</label>
+</td>
+</tr>
+
+  <tr>
+
+    <td colspan="2" align="center"><input type="submit" value="Submit"/></td>
+  </tr>
+</table>
+  </form>
+
 <h3>Participants of Mentor Meetings </h3>
 <?php
 $dbConnection = new mysqli('localhost', 'root', '', 'db2');
 if ($dbConnection->connect_error) {
   die("Connection failed: " . $dbConnection->connect_error);
 }
-session_start();
 $gid = $_SESSION['passedId'];
 //Gid stands for get id of whos ever logged in
 
