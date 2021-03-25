@@ -85,7 +85,7 @@ if ($_POST['userPassword'] === $userPassword) {
   if(!(empty($exampleArray1))){
     echo"log in as admin";
     //Admin log in page
-    header("Location: sample2.html");
+    header("Location: AdminSignedIn.php");
     // replace the above code The "sample2.html" with the login page for Admins
   }
 

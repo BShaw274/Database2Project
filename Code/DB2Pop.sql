@@ -1,4 +1,4 @@
-/* 
+/*
 Population script
 Populates DB2 with at least 10 figures in each thing
 */
@@ -56,25 +56,26 @@ CREATE TABLE `users` (
 
 DELETE FROM `users`;
 INSERT INTO `users` VALUES ('001', 'admin@gmail.com', 'admin', 'Admin', '1-800-ADMIN');
-INSERT INTO `users` VALUES (NULL, 'bob1@Gmail.com', 'bob', 'bob', '01229');
-INSERT INTO `users` VALUES (NULL, 'bob2@Gmail.com', 'bob', 'bob', '01229');
-INSERT INTO `users` VALUES (NULL, 'bob3@Gmail.com', 'bob', 'bob', '01229');
-INSERT INTO `users` VALUES (NULL, 'bob4@Gmail.com', 'bob', 'bob', '01229');
-INSERT INTO `users` VALUES (NULL, 'bob5@Gmail.com', 'bob', 'bob', '01229');
-INSERT INTO `users` VALUES (NULL, 'bob6@Gmail.com', 'bob', 'bob', '01229');
-INSERT INTO `users` VALUES (NULL, 'bob7@Gmail.com', 'bob', 'bob', '01229');
-INSERT INTO `users` VALUES (NULL, 'bob8@Gmail.com', 'bob', 'bob', '01229');
-INSERT INTO `users` VALUES (NULL, 'bob9@Gmail.com', 'bob', 'bob', '01229');
-INSERT INTO `users` VALUES (NULL, 'bob10@Gmail.com', 'bob', 'bob', '01229');
-INSERT INTO `users` VALUES (NULL, 'bob11@Gmail.com', 'bob', 'bob', '01229');
-INSERT INTO `users` VALUES (NULL, 'bob12@Gmail.com', 'bob', 'bob', '01229');
-INSERT INTO `users` VALUES (NULL, 'bob13@Gmail.com', 'bob', 'bob', '01229');
-INSERT INTO `users` VALUES (NULL, 'bob14@Gmail.com', 'bob', 'bob', '01229');
-INSERT INTO `users` VALUES (NULL, 'bob15@Gmail.com', 'bob', 'bob', '01229');
-INSERT INTO `users` VALUES (NULL, 'bob16@Gmail.com', 'bob', 'bob', '01229');
-INSERT INTO `users` VALUES (NULL, 'bob17@Gmail.com', 'bob', 'bob', '01229');
-INSERT INTO `users` VALUES (NULL, 'bob18@Gmail.com', 'bob', 'bob', '01229');
-INSERT INTO `users` VALUES (NULL, 'bob19@Gmail.com', 'bob', 'bob', '01229');
+INSERT INTO `users` VALUES (NULL, 'parent1@Gmail.com', 'pass', 'Parent-Adam', '978-333-9333');
+INSERT INTO `users` VALUES (NULL, 'parent2@Gmail.com', 'pass', 'Parent-Sam', '978-444-8333');
+INSERT INTO `users` VALUES (NULL, 'parent3@Gmail.com', 'pass', 'Parent-Johnson', '978-555-7333');
+INSERT INTO `users` VALUES (NULL, 'parent4@Gmail.com', 'pass', 'Parent-Tim', '978-555-7333');
+INSERT INTO `users` VALUES (NULL, 'parent5@Gmail.com', 'pass', 'Parent-Felix', '978-555-7333');
+INSERT INTO `users` VALUES (NULL, 'parent6@Gmail.com', 'pass', 'Parent-Victor', '978-555-7333');
+INSERT INTO `users` VALUES (NULL, 'parent7@Gmail.com', 'pass', 'Parent-Hayden', '978-555-7333');
+INSERT INTO `users` VALUES (NULL, 'parent8@Gmail.com', 'pass', 'Parent-Patrick', '978-555-7333');
+INSERT INTO `users` VALUES (NULL, 'parent9@Gmail.com', 'pass', 'Parent-Duncan', '978-555-7333');
+INSERT INTO `users` VALUES (NULL, 'parent10@Gmail.com', 'pass', 'Parent-Nicholas', '978-555-7333');
+INSERT INTO `users` VALUES (NULL, 'student1@Gmail.com', 'pass', 'John', '978-555-7333');
+INSERT INTO `users` VALUES (NULL, 'student2@Gmail.com', 'pass', 'Mike', '978-555-7333');
+INSERT INTO `users` VALUES (NULL, 'student3@Gmail.com', 'pass', 'Connor', '978-555-7333');
+INSERT INTO `users` VALUES (NULL, 'student4@Gmail.com', 'pass', 'Brian', '978-555-7333');
+INSERT INTO `users` VALUES (NULL, 'student5@Gmail.com', 'pass', 'Tzur', '978-555-7333');
+INSERT INTO `users` VALUES (NULL, 'student6@Gmail.com', 'pass', 'Kerry', '978-555-7333');
+INSERT INTO `users` VALUES (NULL, 'student7@Gmail.com', 'pass', 'Kevin', '978-555-7333');
+INSERT INTO `users` VALUES (NULL, 'student8@Gmail.com', 'pass', 'Armando', '978-555-7333');
+INSERT INTO `users` VALUES (NULL, 'student9@Gmail.com', 'pass', 'Jack', '978-555-7333');
+INSERT INTO `users` VALUES (NULL, 'student10@Gmail.com', 'pass', 'Cindy', '978-555-7333');
 
 -- ----------------------------
 -- Table structure for parents
@@ -119,16 +120,16 @@ CREATE TABLE `students` (
 -- Data for students
 -- ----------------------------
 
-INSERT INTO `students` (`student_id`, `grade`, `parent_id`) VALUES ('26', '4', '16');
-INSERT INTO `students`  VALUES ('27', '4', '17');
-INSERT INTO `students`  VALUES ('28', '5', '18');
-INSERT INTO `students`  VALUES ('29', '5', '19');
-INSERT INTO `students`  VALUES ('30', '6', '20');
-INSERT INTO `students`  VALUES ('31', '6', '21');
-INSERT INTO `students`  VALUES ('32', '7', '22');
-INSERT INTO `students`  VALUES ('33', '7', '23');
-INSERT INTO `students`  VALUES ('34', '8', '24');
-INSERT INTO `students`  VALUES ('35', '8', '25');
+INSERT INTO `students` (`student_id`, `grade`, `parent_id`) VALUES ('26', '6', '16');
+INSERT INTO `students`  VALUES ('27', '6', '16');
+INSERT INTO `students`  VALUES ('28', '8', '18');
+INSERT INTO `students`  VALUES ('29', '8', '19');
+INSERT INTO `students`  VALUES ('30', '8', '20');
+INSERT INTO `students`  VALUES ('31', '8', '21');
+INSERT INTO `students`  VALUES ('32', '9', '22');
+INSERT INTO `students`  VALUES ('33', '10', '23');
+INSERT INTO `students`  VALUES ('34', '11', '24');
+INSERT INTO `students`  VALUES ('35', '12', '25');
 
 
 -- ----------------------------
@@ -164,8 +165,6 @@ CREATE TABLE `groups` (
 -- Data for groups
 -- ----------------------------
 
-INSERT INTO `groups` (`group_id`, `name`, `description`, `mentor_grade_req`, `mentee_grade_req`) 
-VALUES (NULL, 'Group1', 'Group1', '4', '4');
 INSERT INTO `groups` VALUES ('006', 'Group6', 'Group2', '7', '6');
 INSERT INTO `groups` VALUES ('007', 'Group7', 'Group3', '8', '7');
 INSERT INTO `groups` VALUES ('008', 'Group8', 'Group4', '9', '8');
@@ -192,7 +191,7 @@ CREATE TABLE `time_slot` (
 -- Data for time_slot
 -- ----------------------------
 
-INSERT INTO `time_slot` (`time_slot_id`, `day_of_the_week`, `start_time`, `end_time`) 
+INSERT INTO `time_slot` (`time_slot_id`, `day_of_the_week`, `start_time`, `end_time`)
 VALUES (NULL, 'Saturday', '01:00:0', '02:00:00');
 INSERT INTO `time_slot` VALUES (8, 'Saturday', '01:00:0', '02:00:00');
 INSERT INTO `time_slot` VALUES (9, 'Saturday', '02:00:0', '03:00:00');
@@ -235,14 +234,16 @@ CREATE TABLE `meetings` (
 -- Data for meetings
 -- ----------------------------
 
-INSERT INTO `meetings` (`meet_id`, `meet_name`, `date`, `time_slot_id`, `capacity`, `announcement`, `group_id`) 
-VALUES (NULL, 'Wack', '2021-03-01', '7', '8', 'Welcome', '1');
+/*INSERT INTO `meetings` (`meet_id`, `meet_name`, `date`, `time_slot_id`, `capacity`, `announcement`, `group_id`)
+VALUES (NULL, 'Wack', '2021-03-01', '7', '8', 'Welcome', '1');*/
+INSERT INTO `meetings` VALUES (NULL, 'English', '2021-03-02', '8', '8', 'Welcome to english', '006');
 INSERT INTO `meetings` VALUES (NULL, 'Math', '2021-03-02', '8', '8', 'Welcome to math', '006');
 INSERT INTO `meetings` VALUES (NULL, 'Science', '2021-03-02', '8', '8', 'Welcome to science', '006');
 INSERT INTO `meetings` VALUES (NULL, 'Math', '2021-03-03', '9', '8', 'Welcome to math', '007');
 INSERT INTO `meetings` VALUES (NULL, 'Science', '2021-03-03', '9', '8', 'Welcome to science', '007');
 INSERT INTO `meetings` VALUES (NULL, 'Language Arts', '2021-03-04', '10', '8', 'Welcome to LA', '008');
-INSERT INTO `meetings` VALUES (NULL, 'Algebra', '2021-03-04', '10', '8', 'Welcome to Algebra', '008');
+INSERT INTO `meetings` VALUES (NULL, 'Math-8Algebra', '2021-03-04', '10', '8', 'Welcome to Algebra', '008');
+INSERT INTO `meetings` VALUES (NULL, 'Math-8Algebra', '2021-03-11', '10', '8', 'Welcome to Algebra', '008');
 INSERT INTO `meetings` VALUES (NULL, 'Biology', '2021-03-05', '11', '8', 'Welcome to Bio', '009');
 INSERT INTO `meetings` VALUES (NULL, 'Geometry', '2021-03-05', '11', '8', 'Welcome to Geometry', '009');
 
@@ -266,17 +267,17 @@ CREATE TABLE `material` (
 -- Data for material
 -- ----------------------------
 
-INSERT INTO `material` (`material_id`, `title`, `author`, `type`, `url`, `assigned_date`, `notes`) VALUES 
+INSERT INTO `material` (`material_id`, `title`, `author`, `type`, `url`, `assigned_date`, `notes`) VALUES
 (NULL, 'How to dance', 'Proffesor', 'Video', 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', '2021-03-01', "NULL");
-INSERT INTO `material` VALUES (NULL, 'How to dance', 'Proffesor', 'Video', 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', '2021-03-02', NULL);
-INSERT INTO `material` VALUES (NULL, 'How to dance', 'Proffesor', 'Video', 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', '2021-03-03', NULL);
-INSERT INTO `material` VALUES (NULL, 'How to dance', 'Proffesor', 'Video', 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', '2021-03-04', NULL);
-INSERT INTO `material` VALUES (NULL, 'How to dance', 'Proffesor', 'Video', 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', '2021-03-05', NULL);
-INSERT INTO `material` VALUES (NULL, 'How to dance', 'Proffesor', 'Video', 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', '2021-03-01', NULL);
-INSERT INTO `material` VALUES (NULL, 'How to dance', 'Proffesor', 'Video', 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', '2021-03-02', NULL);
-INSERT INTO `material` VALUES (NULL, 'How to dance', 'Proffesor', 'Video', 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', '2021-03-03', NULL);
-INSERT INTO `material` VALUES (NULL, 'How to dance', 'Proffesor', 'Video', 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', '2021-03-04', NULL);
-INSERT INTO `material` VALUES (NULL, 'How to dance', 'Proffesor', 'Video', 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', '2021-03-05', NULL);
+INSERT INTO `material` VALUES (NULL, 'How to dance1', 'Proffesor', 'Video', 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', '2021-03-02', NULL);
+INSERT INTO `material` VALUES (NULL, 'How to dance2', 'Proffesor', 'Video', 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', '2021-03-03', NULL);
+INSERT INTO `material` VALUES (NULL, 'How to dance3', 'Proffesor', 'Video', 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', '2021-03-04', NULL);
+INSERT INTO `material` VALUES (NULL, 'How to dance4', 'Proffesor', 'Video', 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', '2021-03-05', NULL);
+INSERT INTO `material` VALUES (NULL, 'How to dance5', 'Proffesor', 'Video', 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', '2021-03-01', NULL);
+INSERT INTO `material` VALUES (NULL, 'How to dance6', 'Proffesor', 'Video', 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', '2021-03-02', NULL);
+INSERT INTO `material` VALUES (NULL, 'How to dance7', 'Proffesor', 'Video', 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', '2021-03-03', NULL);
+INSERT INTO `material` VALUES (NULL, 'How to dance8', 'Proffesor', 'Video', 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', '2021-03-04', NULL);
+INSERT INTO `material` VALUES (NULL, 'How to dance9', 'Proffesor', 'Video', 'https://www.youtube.com/watch?v=dQw4w9WgXcQ', '2021-03-05', NULL);
 
 
 -- ----------------------------
@@ -294,16 +295,17 @@ CREATE TABLE `mentees` (
 -- ----------------------------
 
 INSERT INTO `mentees` (`mentee_id`) VALUES ('26');
+INSERT INTO `mentees` VALUES ('27');
 INSERT INTO `mentees` VALUES ('28');
 INSERT INTO `mentees` VALUES ('29');
 INSERT INTO `mentees` VALUES ('30');
 INSERT INTO `mentees` VALUES ('31');
-INSERT INTO `mentees` VALUES ('32');
+/*
 INSERT INTO `mentees` VALUES ('33');
 INSERT INTO `mentees` VALUES ('34');
 INSERT INTO `mentees` VALUES ('35');
 INSERT INTO `mentees` VALUES ('36');
-
+*/
 
 
 -- ----------------------------
@@ -319,17 +321,17 @@ CREATE TABLE `mentors` (
 -- ----------------------------
 -- Data for mentors
 -- ----------------------------
-
+/*
 INSERT INTO `mentors` (`mentor_id`) VALUES ('26');
 INSERT INTO `mentors` VALUES ('28');
 INSERT INTO `mentors` VALUES ('29');
 INSERT INTO `mentors` VALUES ('30');
 INSERT INTO `mentors` VALUES ('31');
+*/
 INSERT INTO `mentors` VALUES ('32');
 INSERT INTO `mentors` VALUES ('33');
 INSERT INTO `mentors` VALUES ('34');
 INSERT INTO `mentors` VALUES ('35');
-INSERT INTO `mentors` VALUES ('36');
 
 -- ----------------------------
 -- Table structure for enroll
@@ -350,14 +352,14 @@ CREATE TABLE `enroll` (
 
 INSERT INTO `enroll` (`meet_id`, `mentee_id`) VALUES ('100', '26');
 INSERT INTO `enroll`  VALUES ('101', '27');
-INSERT INTO `enroll`  VALUES ('102', '28');
-INSERT INTO `enroll`  VALUES ('103', '29');
-INSERT INTO `enroll`  VALUES ('104', '30');
-INSERT INTO `enroll`  VALUES ('105', '31');
-INSERT INTO `enroll`  VALUES ('106', '32');
-INSERT INTO `enroll`  VALUES ('107', '33');
+/*INSERT INTO `enroll`  VALUES ('102', '28');*/
+/*INSERT INTO `enroll`  VALUES ('103', '29');*/
+INSERT INTO `enroll`  VALUES ('105', '30');
+INSERT INTO `enroll`  VALUES ('106', '31');
+/*INSERT INTO `enroll`  VALUES ('106', '32');*/
+/*INSERT INTO `enroll`  VALUES ('107', '33');
 INSERT INTO `enroll`  VALUES ('108', '34');
-INSERT INTO `enroll`  VALUES ('109', '35');
+INSERT INTO `enroll`  VALUES ('109', '35');*/
 
 -- ----------------------------
 -- Table structure for enroll2
@@ -376,16 +378,17 @@ CREATE TABLE `enroll2` (
 -- Data for enroll2
 -- ----------------------------
 
-INSERT INTO `enroll2` (`meet_id`, `mentor_id`) VALUES ('100', '26');
-INSERT INTO `enroll2`  VALUES ('101', '27');
+/*INSERT INTO `enroll2` (`meet_id`, `mentor_id`) VALUES ('100', '26');*/
+/*INSERT INTO `enroll2`  VALUES ('101', '27');
 INSERT INTO `enroll2`  VALUES ('102', '28');
 INSERT INTO `enroll2`  VALUES ('103', '29');
 INSERT INTO `enroll2`  VALUES ('104', '30');
 INSERT INTO `enroll2`  VALUES ('105', '31');
-INSERT INTO `enroll2`  VALUES ('106', '32');
-INSERT INTO `enroll2`  VALUES ('107', '33');
-INSERT INTO `enroll2`  VALUES ('108', '34');
-INSERT INTO `enroll2`  VALUES ('109', '35');
+*/
+INSERT INTO `enroll2`  VALUES ('100', '32');
+INSERT INTO `enroll2`  VALUES ('101', '33');
+INSERT INTO `enroll2`  VALUES ('102', '34');
+INSERT INTO `enroll2`  VALUES ('103', '35');
 
 -- ----------------------------
 -- Table structure for assign
