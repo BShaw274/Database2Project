@@ -27,7 +27,7 @@ if (!mysqli_num_rows($result)) {
 // checks to see if the meeting is due
 $sql = "SELECT meet_id
 FROM meetings
-Where DATEDIFF( date, CURRENT_TIMESTAMP) < 3 AND meet_id = " . $meetingId. ";";
+Where Week(CURRENT_TIMESTAMP) <= Week(date) AND weekday(CURRENT_TIMESTAMP) BETWEEN 4 AND 6 AND meet_id = " . $meetingId. ";";
 $result = mysqli_query($dbConnection , $sql);
 if (mysqli_num_rows($result)) {
     // if meeting is due, close out
