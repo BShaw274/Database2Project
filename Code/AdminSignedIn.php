@@ -97,6 +97,18 @@
 
 <br>
 
+
+<p>Create Recurring Meetings or a Singular Meeting</p>
+<tr>
+<input type="radio" id="recurring" name="recurringCheck" value="1">
+<label for="recurring">Recurring</label><br>
+
+<input type="radio" id="notRecurring" name="recurringCheck" value="0">
+<label for="notRecurring">Singular Meeting</label><br>
+</tr>
+
+<br>
+
 <tr>
   <td colspan="2" align="center"><input type="submit" value="Submit"/></td>
 </tr>
