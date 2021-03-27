@@ -37,6 +37,7 @@ if (mysqli_num_rows($result) > 0) {
   echo "0 results";
 }
 
+
 ?>
 
 <h3>Update Account Information</h3>
@@ -282,7 +283,7 @@ $stmt->close();
 //now get mentee id for same meeting
 } //this is the closing bracked for checking if $MeetIdResult is not Empty
 ?>
-<h3>Meeting Information</h3>
+<h3>Study Materials</h3>
 <!-- Here I need to dispaly Meetings and infor for them -->
 <?php
 // Old code from ParentLogin that needs to be adapted
@@ -294,6 +295,53 @@ if ($dbConnection->connect_error) {
 }
 */ //No need for 2 connections
 
+
+$currentDate = date('Y-m-d');
+$currentWeek = new dateTime($currentDate);
+$previousWeek = new dateTime($currentDate);
+
+$currentWeek->modify('+1 week');
+$previousWeek->modify('-1 week');
+
+
+$query  = "SELECT material_id FROM assign
+INNER JOIN meetings ON assign.meet_id = meetings.meet_id
+WHERE meetings.date >= '{$previousWeek->format('Y-m-d')}' AND meetings.date <= '{$currentWeek->format('Y-m-d')}'";
+$results = mysqli_query($dbConnection, $query);
+
+$materialIds = [];
+while ($row = mysqli_fetch_array ($results, MYSQLI_ASSOC)) {
+  //$materialIds += $row['material_id'];
+  //echo $meetingGrade;
+  array_push($materialIds, $row['material_id']);
+}
+
+for ($i = 0; $i < mysqli_num_rows($results); $i++){
+  $query = "SELECT * FROM material WHERE material_id = {$materialIds[$i]}";
+  $result = mysqli_query($dbConnection, $query);
+  while($row = mysqli_fetch_assoc($result)){
+    echo "Material's Id: ". $row['material_id'];
+    echo " ";
+    echo "Title: ". $row['title'];
+    echo " ";
+    echo "Author: ". $row['author'];
+    echo " ";
+    echo "Type: ". $row['type'];
+    echo " ";
+    echo "Url: ". $row['url'];
+    echo " ";
+    echo "Assigned Date: ". $row['assigned_date'];
+    echo " ";
+    echo "Notes: ". $row['notes'];
+    echo "<br>";
+  }
+}
+
+
+?>
+
+<h4>Meeting Information</h4>
+<?php
 $sql = "SELECT * from meetings";
 $result = mysqli_query($dbConnection , $sql);
 
