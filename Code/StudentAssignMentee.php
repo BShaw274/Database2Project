@@ -13,6 +13,18 @@ if ($dbConnection->connect_error) {
 }
 //Actual Code:
 
+// checks to see if the meeting is late
+$sql = "SELECT meet_id
+FROM meetings
+Where Week(CURRENT_TIMESTAMP) <= Week(date) AND weekday(CURRENT_TIMESTAMP) BETWEEN 4 AND 6 AND meet_id = " . $meetingId. ";";
+$result = mysqli_query($dbConnection , $sql);
+if (mysqli_num_rows($result)) {
+    // if meeting is due, close out
+    Echo "It is to late to join meeting";
+    $dbConnection->close();
+    die();
+}
+
 // Style borrowed : https://stackoverflow.com/questions/2552545/mysqli-prepared-statements-error-reporting
 //Uses Prepared Statements to prepare Query String, Uses bind_param to insert variables into the Query String e
 //then pushes the query to the Database with Execute()

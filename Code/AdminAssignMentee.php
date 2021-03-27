@@ -13,11 +13,114 @@ if ($dbConnection->connect_error) {
 }
 //Actual Code:
 
+// checks to see if the meeting is late
+$sql = "SELECT meet_id
+FROM meetings
+Where Week(CURRENT_TIMESTAMP) <= Week(date) AND weekday(CURRENT_TIMESTAMP) BETWEEN 4 AND 6 AND meet_id = " . $meetingId. ";";
+$result = mysqli_query($dbConnection , $sql);
+if (mysqli_num_rows($result)) {
+    // if meeting is due, close out
+    Echo "It is to late to join meeting";
+    $dbConnection->close();
+    die();
+}
+
+// checks to see if the meeting is late
+$sql = "SELECT meet_id
+FROM meetings
+Where Week(CURRENT_TIMESTAMP) <= Week(date) AND weekday(CURRENT_TIMESTAMP) BETWEEN 4 AND 6 AND meet_id = " . $meetingId. ";";
+$result = mysqli_query($dbConnection , $sql);
+if (mysqli_num_rows($result)) {
+    // if meeting is due, close out
+    Echo "It is to late to join meeting";
+    $dbConnection->close();
+    die();
+}
+
 // Style borrowed : https://stackoverflow.com/questions/2552545/mysqli-prepared-statements-error-reporting
 //Uses Prepared Statements to prepare Query String, Uses bind_param to insert variables into the Query String e
 //then pushes the query to the Database with Execute()
 
 if ($MenteeRadioVal == 'single'){
+
+  //Time and Date Check code
+  //Getting time slot of entered meeting
+  $stmt = $dbConnection->prepare("SELECT time_slot_id, date from meetings where meet_id=?");
+  if(false ===$stmt){
+    die('prepare() failed: ' . htmlspecialchars($mysqli->error));
+  }
+  $check = $stmt->bind_param("s", $meetingId);
+  if(false ===$check){
+    die('bind_param() failed: ' . htmlspecialchars($stmt->error));
+  }
+  $check = $stmt->execute();
+  if(false ===$check){
+    die('execute() failed: ' . htmlspecialchars($stmt->error));
+  }
+  $timeSlotResult = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+   $stmt->close();
+   //var_dump($timeSlotResult);
+
+  //Checking time slots of other meetings student is currently in for mentee
+   $stmt = $dbConnection->prepare("SELECT meet_id from enroll where mentee_id=?");
+   if(false ===$stmt){
+     die('prepare() failed: ' . htmlspecialchars($mysqli->error));
+   }
+   $check = $stmt->bind_param("s", $studentId);
+   if(false ===$check){
+     die('bind_param() failed: ' . htmlspecialchars($stmt->error));
+   }
+   $check = $stmt->execute();
+   if(false ===$check){
+     die('execute() failed: ' . htmlspecialchars($stmt->error));
+   }
+   $meetIdMentee = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    $stmt->close();
+
+
+
+    //Checking time slots of other meetings student is currently in for mentor
+     $stmt = $dbConnection->prepare("SELECT meet_id from enroll2 where mentor_id=?");
+     if(false ===$stmt){
+       die('prepare() failed: ' . htmlspecialchars($mysqli->error));
+     }
+     $check = $stmt->bind_param("s", $studentId);
+     if(false ===$check){
+       die('bind_param() failed: ' . htmlspecialchars($stmt->error));
+     }
+     $check = $stmt->execute();
+     if(false ===$check){
+       die('execute() failed: ' . htmlspecialchars($stmt->error));
+     }
+     $meetIdMentor = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+      $stmt->close();
+
+     $allEnrolledId=array_merge($meetIdMentee, $meetIdMentor);
+     //var_dump($allEnrolledId);
+     //echo "||||||||||||||||||";
+
+     for($i=0; $i<count($allEnrolledId); $i++){
+       $stmt = $dbConnection->prepare("SELECT time_slot_id, date from meetings where meet_id=?");
+       if(false ===$stmt){
+         die('prepare() failed: ' . htmlspecialchars($mysqli->error));
+       }
+       $check = $stmt->bind_param("s", $allEnrolledId[$i]['meet_id']);
+       if(false ===$check){
+         die('bind_param() failed: ' . htmlspecialchars($stmt->error));
+       }
+       $check = $stmt->execute();
+       if(false ===$check){
+         die('execute() failed: ' . htmlspecialchars($stmt->error));
+       }
+       $checkTimeId = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+       $stmt->close();
+       //var_dump($checkTimeId);
+       if($timeSlotResult[0]['time_slot_id']==$checkTimeId[0]['time_slot_id'] && $timeSlotResult[0]['date']==$checkTimeId[0]['date']){
+         echo "Cannot sign up for meeting because of time conflict with other meetings.";
+         return;
+       }
+
+     }//Closing out for loop that checks times and dates to verify if student has time conflict
 //inserting the students Id into mentees
 $query = 'SELECT mentee_id FROM mentees WHERE mentee_id= ' . $studentId;
 $result = mysqli_query($dbConnection, $query);
@@ -186,6 +289,85 @@ if ($MenteeRadioVal == 'Reoccuring'){
   for($k=0;$k<count($ReoccurIDs);$k++){
   $meetingId = $ReoccurIDs[$k]['meet_id'];
   // Do single for each $ReoccurIDs
+
+  //Time and Date Check code
+  //Getting time slot of entered meeting
+  $stmt = $dbConnection->prepare("SELECT time_slot_id, date from meetings where meet_id=?");
+  if(false ===$stmt){
+    die('prepare() failed: ' . htmlspecialchars($mysqli->error));
+  }
+  $check = $stmt->bind_param("s", $meetingId);
+  if(false ===$check){
+    die('bind_param() failed: ' . htmlspecialchars($stmt->error));
+  }
+  $check = $stmt->execute();
+  if(false ===$check){
+    die('execute() failed: ' . htmlspecialchars($stmt->error));
+  }
+  $timeSlotResult = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+   $stmt->close();
+   //var_dump($timeSlotResult);
+
+  //Checking time slots of other meetings student is currently in for mentee
+   $stmt = $dbConnection->prepare("SELECT meet_id from enroll where mentee_id=?");
+   if(false ===$stmt){
+     die('prepare() failed: ' . htmlspecialchars($mysqli->error));
+   }
+   $check = $stmt->bind_param("s", $studentId);
+   if(false ===$check){
+     die('bind_param() failed: ' . htmlspecialchars($stmt->error));
+   }
+   $check = $stmt->execute();
+   if(false ===$check){
+     die('execute() failed: ' . htmlspecialchars($stmt->error));
+   }
+   $meetIdMentee = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    $stmt->close();
+
+
+
+    //Checking time slots of other meetings student is currently in for mentor
+     $stmt = $dbConnection->prepare("SELECT meet_id from enroll2 where mentor_id=?");
+     if(false ===$stmt){
+       die('prepare() failed: ' . htmlspecialchars($mysqli->error));
+     }
+     $check = $stmt->bind_param("s", $studentId);
+     if(false ===$check){
+       die('bind_param() failed: ' . htmlspecialchars($stmt->error));
+     }
+     $check = $stmt->execute();
+     if(false ===$check){
+       die('execute() failed: ' . htmlspecialchars($stmt->error));
+     }
+     $meetIdMentor = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+      $stmt->close();
+
+     $allEnrolledId=array_merge($meetIdMentee, $meetIdMentor);
+     //var_dump($allEnrolledId);
+     //echo "||||||||||||||||||";
+
+     for($i=0; $i<count($allEnrolledId); $i++){
+       $stmt = $dbConnection->prepare("SELECT time_slot_id, date from meetings where meet_id=?");
+       if(false ===$stmt){
+         die('prepare() failed: ' . htmlspecialchars($mysqli->error));
+       }
+       $check = $stmt->bind_param("s", $allEnrolledId[$i]['meet_id']);
+       if(false ===$check){
+         die('bind_param() failed: ' . htmlspecialchars($stmt->error));
+       }
+       $check = $stmt->execute();
+       if(false ===$check){
+         die('execute() failed: ' . htmlspecialchars($stmt->error));
+       }
+       $checkTimeId = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+       $stmt->close();
+       //var_dump($checkTimeId);
+       if($timeSlotResult[0]['time_slot_id']==$checkTimeId[0]['time_slot_id'] && $timeSlotResult[0]['date']==$checkTimeId[0]['date']){
+         echo "Cannot sign up for meeting because of time conflict with other meetings.";
+         return;
+       }
+
+     }//Closing out for loop that checks times and dates to verify if student has time conflict
 
     $query = 'SELECT mentee_id FROM mentees WHERE mentee_id= ' . $studentId;
     $result = mysqli_query($dbConnection, $query);
