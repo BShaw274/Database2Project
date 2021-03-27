@@ -16,7 +16,13 @@ if($mydb = mysqli_select_db ($myconnection, 'db2')){
     echo "Connection made to DB2<br>";
 } else  {  
     echo "DB2 could not be found <br>";
-    die ('Could not connect to DB2');
+    if (mysqli_query($myconnection, "CREATE DATABASE db2")) {
+        echo "DB2 created successfully <br>";
+        $mydb = mysqli_select_db ($myconnection, 'db2');
+        } else {
+        echo "Error creating DB2: " . mysqli_error($conn);
+        die ('Could not connect to DB2');
+      }
 }
 
 //gets DB2 sql puts it into $query
