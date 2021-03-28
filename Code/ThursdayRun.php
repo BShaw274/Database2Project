@@ -61,12 +61,19 @@ if (mysqli_num_rows($result) > 0) {
 
 // prints out a list of students that have to be alerted beccause of the cancled meeting
 echo "<h3>Students that need to be alerted to closed meetings</h3>";
-$sql = "SELECT name, email, meet_name
+$sql = "SELECT name, email, meet_name, \"Mentee\"
 FROM users , meetings, enroll
 WHERE DATEDIFF( date, CURRENT_TIMESTAMP) < 3 AND users.id = enroll.mentee_id AND meetings.meet_id = enroll.meet_id AND enroll.meet_id IN (SELECT meet_id
 FROM enroll
 GROUP BY meet_id
-having COUNT(mentee_id) < 3);";
+having COUNT(mentee_id) < 3) 
+UNION
+SELECT name, email, meet_name, \"Mentor\"
+FROM users , meetings, enroll2 
+WHERE DATEDIFF( date, CURRENT_TIMESTAMP) < 3 AND users.id = enroll2.mentor_id AND meetings.meet_id = enroll2.meet_id AND enroll2.meet_id IN (SELECT meet_id
+FROM enroll2
+GROUP BY meet_id
+having COUNT(mentor_id) < 2);";
 $result = mysqli_query($myconnection , $sql);
 
 // opens file to write into to store list of students who need meetings
@@ -76,7 +83,7 @@ if (mysqli_num_rows($result)) {
   // output data of each row
   echo "<p> ";
   while($row = mysqli_fetch_assoc($result)) {
-    $text = "Name: " . $row["name"]. "     Email: " . $row["email"]. "     Meeting Name: " . $row["meet_name"];
+    $text =  end($row) . "-  Name: " . $row["name"]. "     Email: " . $row["email"]. "     Meeting Name: " . $row["meet_name"] ;
     echo $text. "<br>" ;
     fwrite($myfile, $text . "\n");
   }
@@ -97,9 +104,9 @@ GROUP BY meet_id
 having COUNT(mentee_id) < 3);";
 
 if (mysqli_query($myconnection, $sql)) {
-  echo "Empty meetings deleted successfully";
+  echo "<br>Empty meetings deleted successfully<br>";
 } else {
-  echo "Error deleting empty metings: " . mysqli_error($myconnection);
+  echo "Error deleting empty meetings: " . mysqli_error($myconnection);
 }
 
 // prints out meetings that need more mentors
