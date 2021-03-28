@@ -101,15 +101,20 @@ FROM meetings
 Where DATEDIFF( date, CURRENT_TIMESTAMP) < 3 AND  meet_id IN (SELECT meet_id
 FROM enroll
 GROUP BY meet_id
-having COUNT(mentee_id) < 3);";
-
+having COUNT(mentee_id) < 3 
+Union
+SELECT meet_id
+FROM enroll2
+GROUP BY meet_id
+having COUNT(mentor_id) < 2) );";
+// checks database deleted meetings correctlty
 if (mysqli_query($myconnection, $sql)) {
   echo "<br>Empty meetings deleted successfully<br>";
 } else {
   echo "Error deleting empty meetings: " . mysqli_error($myconnection);
 }
 
-// prints out meetings that need more mentors
+// prints out meetings that need more mentors : runs after meetings to 
 echo "<h3>Meetings that need mentors</h3>";
 $sql = "SELECT meet_id
 FROM enroll2
