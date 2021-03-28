@@ -1,5 +1,3 @@
-
-
 <html>
 <head>
   <title>Student's Homepage</title>
@@ -44,6 +42,7 @@ if (mysqli_num_rows($result) > 0) {
 <p>Fill in the fields with the updated information and sumbit to update your profile! </p>
 <br>
 
+<!-- If user wants to update their own account information they will be redirected to selfupdate.php -->
 <form action="selfUpdate.php" method="post">
 
 Email:       <input type="email" id='email' name='userEmail'>
@@ -70,8 +69,8 @@ Phone Number:<input type="text" id='phoneNumber' name='userPhone'>
   <td colspan="2" align="center">
   <input type="radio" id="Single" name="MentorSelect" value="single" required>
   <label for="single">Single</label>
-  <input type="radio" id="Reoccuring" name="MentorSelect" value="Reoccuring">
-  <label for="Reoccuring">Reoccuring</label>
+  <input type="radio" id="Recurring" name="MentorSelect" value="Recurring">
+  <label for="Recurring">Recurring</label>
 </td>
 </tr>
 <tr>
@@ -95,8 +94,8 @@ Phone Number:<input type="text" id='phoneNumber' name='userPhone'>
   <td colspan="2" align="center">
     <input type="radio" id="Single" name="MenteeSelect" value="single" required>
   <label for="Single">Single</label>
-  <input type="radio" id="Reoccuring" name="MenteeSelect" value="Reoccuring">
-  <label for="Reoccuring">Reoccuring</label>
+  <input type="radio" id="Recurring" name="MenteeSelect" value="Recurring">
+  <label for="Recurring">Recurring</label>
 </td>
 </tr>
 
@@ -159,6 +158,7 @@ Phone Number:<input type="text" id='phoneNumber' name='userPhone'>
 </table>
   </form>
 
+<!-- If you are a mentor, this section displays information about who is enrolled in your meetings that you mentor -->
 <h3>Participants of Mentor Meetings </h3>
 <?php
 $dbConnection = new mysqli('localhost', 'root', '', 'db2');
@@ -340,6 +340,7 @@ for ($i = 0; $i < mysqli_num_rows($results); $i++){
 
 ?>
 
+<!-- Displays info about meetings that you can try to join -->
 <h4>Meeting Information</h4>
 <?php
 $sql = "SELECT * from meetings";

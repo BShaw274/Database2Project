@@ -131,8 +131,8 @@ New Phone Number:<input type="text" id='phoneNumber' name='userPhone' >
   <td colspan="2" align="center">
   <input type="radio" id="Single" name="MentorSelect" value="single" required>
   <label for="single">Single</label>
-  <input type="radio" id="Reoccuring" name="MentorSelect" value="Reoccuring">
-  <label for="Reoccuring">Reoccuring</label>
+  <input type="radio" id="Recurring" name="MentorSelect" value="Recurring">
+  <label for="Recurring">Recurring</label>
 </td>
 </tr>
 <tr>
@@ -162,8 +162,8 @@ New Phone Number:<input type="text" id='phoneNumber' name='userPhone' >
   <td colspan="2" align="center">
   <input type="radio" id="Single" name="MenteeSelect" value="single" required>
   <label for="single">Single</label>
-  <input type="radio" id="Reoccuring" name="MenteeSelect" value="Reoccuring">
-  <label for="Reoccuring">Reoccuring</label>
+  <input type="radio" id="Recurring" name="MenteeSelect" value="Recurring">
+  <label for="Recurring">Recurring</label>
 </td>
 </tr>
   <tr>

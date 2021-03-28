@@ -22,12 +22,6 @@ if ($dbConnection->connect_error) {
 session_start();
 $gid = $_SESSION['passedId'];
 
-//test echos
-echo " Echoing Passed ID: ".$gid;
-echo " Echoing Email update: ".$userEmail;
-//echo " Echoing Password update: ".$userPassword;
-echo " Echoing Name update: ".$userName;
-//echo " Echoing Phone update: ".$userPhone;
 
 //update the info
 //Update -- Email
@@ -48,6 +42,7 @@ if(false ===$check){
   die('execute() failed: ' . htmlspecialchars($stmt->error));
 }
   $stmt->close();
+  echo " Echoing Email update: ".$userEmail;
 }//Email Update Done
 
 
@@ -69,6 +64,7 @@ if(false ===$check){
   die('execute() failed: ' . htmlspecialchars($stmt->error));
 }
   $stmt->close();
+  echo " Echoing Password update: ".$userPassword;
 }//Password Update Done
 
 //Update -- Name
@@ -89,6 +85,7 @@ if(false ===$check){
   die('execute() failed: ' . htmlspecialchars($stmt->error));
 }
   $stmt->close();
+  echo " Echoing Name update: ".$userName;
 }//Name Update Done
 
 //Update -- Phone
@@ -109,12 +106,8 @@ if(false ===$check){
   die('execute() failed: ' . htmlspecialchars($stmt->error));
 }
   $stmt->close();
+  echo " Echoing Phone update: ".$userPhone;
 }//Phone Update Done
 
-
-
-//refreshs the page by gonig to same page, commented out for testing purposes
-
-  //header("Location:studentLogin.html");
 
  ?>

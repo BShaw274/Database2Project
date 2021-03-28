@@ -30,7 +30,7 @@ if (mysqli_num_rows($result)) {
 //Uses Prepared Statements to prepare Query String, Uses bind_param to insert variables into the Query String e
 //then pushes the query to the Database with Execute()
 
-//inserting the students Id into mentors
+//Selects students tied to parent
 $stmt = $dbConnection->prepare("SELECT student_id from students where parent_id=? AND student_id=?");
 if(false ===$stmt){
   die('prepare() failed: ' . htmlspecialchars($mysqli->error));
@@ -65,6 +65,8 @@ if(!(empty($arrayIsStudentOf))){
     if(false ===$check){
       die('execute() failed: ' . htmlspecialchars($stmt->error));
     }
+
+    //store time_slot_id here
     $timeSlotResult = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
      $stmt->close();
      //var_dump($timeSlotResult);
@@ -103,10 +105,12 @@ if(!(empty($arrayIsStudentOf))){
        $meetIdMentor = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
         $stmt->close();
 
+        //merge both mentee/mentor meeting ids
        $allEnrolledId=array_merge($meetIdMentee, $meetIdMentor);
        //var_dump($allEnrolledId);
        //echo "||||||||||||||||||";
 
+       //comparing time slot ids to make sure that there are no conflicts
        for($i=0; $i<count($allEnrolledId); $i++){
          $stmt = $dbConnection->prepare("SELECT time_slot_id, date from meetings where meet_id=?");
          if(false ===$stmt){
@@ -123,6 +127,7 @@ if(!(empty($arrayIsStudentOf))){
          $checkTimeId = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
          $stmt->close();
          //var_dump($checkTimeId);
+         //If there is a time conflict then let the user know and don't let them sign up for the meeting
          if($timeSlotResult[0]['time_slot_id']==$checkTimeId[0]['time_slot_id'] && $timeSlotResult[0]['date']==$checkTimeId[0]['date']){
            echo "Cannot sign up for meeting because of time conflict with other meetings.";
            return;
@@ -130,6 +135,7 @@ if(!(empty($arrayIsStudentOf))){
 
        }//Closing out for loop that checks times and dates to verify if student has time conflict
 
+//inserting the students Id into mentors
 $query = 'SELECT mentor_id FROM mentors WHERE mentor_id= ' . $studentId;
 $result = mysqli_query($dbConnection, $query);
 
@@ -259,8 +265,9 @@ if($studentGrade > $meetingGrade){
   echo "Student is not in high enough grade level to be a mentor";
 }
 }//if Single Radio val Close
-if ($MentorRadioVal == 'Reoccuring'){
-  //Get all reoccuring meetins id
+//A lot of the code in recurring is copied from single, the only difference is enrolling in multiple meetings and checking conflicts with multiple meetings
+if ($MentorRadioVal == 'Recurring'){
+  //Get all recurring meetins id
   $stmt = $dbConnection->prepare("SELECT meet_name FROM meetings WHERE meet_id = ?");
   if(false ===$stmt){
     die('prepare() failed: ' . htmlspecialchars($mysqli->error));
@@ -278,6 +285,7 @@ if ($MentorRadioVal == 'Reoccuring'){
   //var_dump($MeetName);
   //Get all IDs of $MeetName
 
+  //Grab all meetings with same name
   $stmt = $dbConnection->prepare("SELECT meet_id FROM meetings WHERE meet_name = ?");
   if(false ===$stmt){
     die('prepare() failed: ' . htmlspecialchars($mysqli->error));
@@ -290,12 +298,13 @@ if ($MentorRadioVal == 'Reoccuring'){
   if(false ===$check){
     die('execute() failed: ' . htmlspecialchars($stmt->error));
   }
-  $ReoccurIDs = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-  //var_dump($ReoccurIDs);
+  $RecurIDs = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+  //var_dump($RecurIDs);
   $stmt->close();
 
-  for($k=0;$k<count($ReoccurIDs);$k++){
-  $meetingId = $ReoccurIDs[$k]['meet_id'];
+  //Grab all id's with the same name
+  for($k=0;$k<count($RecurIDs);$k++){
+  $meetingId = $RecurIDs[$k]['meet_id'];
   // Do the single loop as many times for each duplicate meeting
 
   //Time and Date Check code
@@ -507,7 +516,7 @@ if ($MentorRadioVal == 'Reoccuring'){
     echo "Student is not in high enough grade level to be a mentor";
   }
 }
-}//Reoccuring Radio Val Close
+}//Recurring Radio Val Close
 }//If !empty Close
 $dbConnection->close();
 ?>

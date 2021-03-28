@@ -1,6 +1,6 @@
 <?php
 
-// Getting info posted from userSignupParent.html form action line 9
+// Getting info posted from userSignupParent.html form action line 10
 $userEmail = $_POST['userEmail'];
 $userPassword = $_POST['userPassword'];
 $userName = $_POST['userName'];
@@ -11,11 +11,10 @@ $dbConnection = new mysqli('localhost', 'root', '', 'db2');
 if ($dbConnection->connect_error) {
   die("Connection failed: " . $dbConnection->connect_error);
 }
-//Actual Code:
 
-// Style borrowed : https://stackoverflow.com/questions/2552545/mysqli-prepared-statements-error-reporting
 //Uses Prepared Statements to prepare Query String, Uses bind_param to insert variables into the Query String e
 //then pushes the query to the Database with Execute()
+//Inserts information into the users table that was entered
 $stmt = $dbConnection->prepare("INSERT INTO users (email, password, name, phone) VALUES (?, ?, ?, ?)");
 if(false ===$stmt){
   die('prepare() failed: ' . htmlspecialchars($mysqli->error));

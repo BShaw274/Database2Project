@@ -33,6 +33,7 @@ if (mysqli_num_rows($result)) {
 
 //inserting the students Id into mentors
 //echo $MentorRadioVal;
+//single selector chosen
 if ($MentorRadioVal == 'single'){
 
   //Time and Date Check code
@@ -49,6 +50,8 @@ if ($MentorRadioVal == 'single'){
   if(false ===$check){
     die('execute() failed: ' . htmlspecialchars($stmt->error));
   }
+
+  //stores time slot of entered meeting
   $timeSlotResult = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
    $stmt->close();
    //var_dump($timeSlotResult);
@@ -87,10 +90,12 @@ if ($MentorRadioVal == 'single'){
      $meetIdMentor = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
       $stmt->close();
 
+      //merges ids of meeting you both mentor and mentee in
      $allEnrolledId=array_merge($meetIdMentee, $meetIdMentor);
      //var_dump($allEnrolledId);
      //echo "||||||||||||||||||";
 
+     //compares time slot of entered meeting to meetings you mentor/mentee in
      for($i=0; $i<count($allEnrolledId); $i++){
        $stmt = $dbConnection->prepare("SELECT time_slot_id, date from meetings where meet_id=?");
        if(false ===$stmt){
@@ -247,13 +252,13 @@ if($studentGrade > $meetingGrade){
 }
 
 }// ends $MentorRadioVal = "sinlge" If
-//He signs up for all reoccuring meetings
+//He signs up for all recurring meetings
 // gets all id's of meetings siging up for
-// Then does for loop of individual code across all the reoccuring meet_ids
+// Then does for loop of individual code across all the recurring meet_ids
 
-
-elseif ($MentorRadioVal == 'Reoccuring'){
-//Get all reoccuring meetins id
+//recurring option selected
+elseif ($MentorRadioVal == 'Recurring'){
+//Get all recurring meetins id
 $stmt = $dbConnection->prepare("SELECT meet_name FROM meetings WHERE meet_id = ?");
 if(false ===$stmt){
   die('prepare() failed: ' . htmlspecialchars($mysqli->error));
@@ -283,12 +288,12 @@ $check = $stmt->execute();
 if(false ===$check){
   die('execute() failed: ' . htmlspecialchars($stmt->error));
 }
-$ReoccurIDs = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-//var_dump($ReoccurIDs);
+$RecurIDs = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+//var_dump($RecurIDs);
 $stmt->close();
 
-for($k=0;$k<count($ReoccurIDs);$k++){
-$meetingId = $ReoccurIDs[$k]['meet_id'];
+for($k=0;$k<count($RecurIDs);$k++){
+$meetingId = $RecurIDs[$k]['meet_id'];
 // Do the Single version as many timse as the for loops takes us
 
 //Time and Date Check code
@@ -504,8 +509,8 @@ if($studentGrade > $meetingGrade){
 
 
 
-}//reoccure ids For Loop
-}//reoccuring else if
+}//recur ids For Loop
+}//recurring else if
 
 $dbConnection->close();
 
