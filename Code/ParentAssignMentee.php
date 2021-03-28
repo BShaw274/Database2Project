@@ -48,6 +48,7 @@ $arrayIsStudentOf = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
  if(empty($arrayIsStudentOf)){
    echo"The ID entered is not a Valid ID of one of your students.";
  }
+  //Check if student entered is of parent
 if(!(empty($arrayIsStudentOf))){
   if ($MenteeRadioVal == 'single'){
 //Time and Date Check code
@@ -102,10 +103,12 @@ $timeSlotResult = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
    $meetIdMentor = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     $stmt->close();
 
+   //merge both mentee/mentor meeting ids
    $allEnrolledId=array_merge($meetIdMentee, $meetIdMentor);
    //var_dump($allEnrolledId);
    //echo "||||||||||||||||||";
 
+   //comparing time slot ids to make sure that there are no conflicts
    for($i=0; $i<count($allEnrolledId); $i++){
      $stmt = $dbConnection->prepare("SELECT time_slot_id, date from meetings where meet_id=?");
      if(false ===$stmt){
@@ -265,9 +268,10 @@ if($studentGrade == $meetingGrade){
   echo "Student is not in the same grade level as the meeting";
 }
 }//if single radio value close
-  elseif ($MenteeRadioVal == 'Reoccuring'){
-    //Now need to join the student as mentee into all reoccuring meetings with same name
-    //Get all reoccuring meetins id
+//Recurring option selected
+  elseif ($MenteeRadioVal == 'Recurring'){
+    //Now need to join the student as mentee into all recurring meetings with same name
+    //Get all recurring meetings id
     $stmt = $dbConnection->prepare("SELECT meet_name FROM meetings WHERE meet_id = ?");
     if(false ===$stmt){
       die('prepare() failed: ' . htmlspecialchars($mysqli->error));
@@ -285,6 +289,7 @@ if($studentGrade == $meetingGrade){
     //var_dump($MeetName);
     //Get all IDs of $MeetName
 
+    //Grab all meetings with same name
     $stmt = $dbConnection->prepare("SELECT meet_id FROM meetings WHERE meet_name = ?");
     if(false ===$stmt){
       die('prepare() failed: ' . htmlspecialchars($mysqli->error));
@@ -297,12 +302,13 @@ if($studentGrade == $meetingGrade){
     if(false ===$check){
       die('execute() failed: ' . htmlspecialchars($stmt->error));
     }
-    $ReoccurIDs = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-    //var_dump($ReoccurIDs);
+    $RecurIDs = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+    //var_dump($RecurIDs);
     $stmt->close();
 
-    for($k=0;$k<count($ReoccurIDs);$k++){
-    $meetingId = $ReoccurIDs[$k]['meet_id'];
+    //Grab all id's with the same name
+    for($k=0;$k<count($RecurIDs);$k++){
+    $meetingId = $RecurIDs[$k]['meet_id'];
     // Do the single loop for each duplicate meeting
 
     //Time and Date Check code
@@ -515,8 +521,8 @@ if($studentGrade == $meetingGrade){
     }else{
       echo "Student is not in the same grade level as the meeting";
 }
-}// $ReoccurIDs For loop CLose
-}// IF Reoccuring radio val Close
+}// $RecurIDs For loop CLose
+}// IF Recurring radio val Close
 }// !(empty) Check
 $dbConnection->close();
 ?>

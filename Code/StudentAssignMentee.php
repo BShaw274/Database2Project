@@ -25,9 +25,7 @@ if (mysqli_num_rows($result)) {
     die();
 }
 
-// Style borrowed : https://stackoverflow.com/questions/2552545/mysqli-prepared-statements-error-reporting
-//Uses Prepared Statements to prepare Query String, Uses bind_param to insert variables into the Query String e
-//then pushes the query to the Database with Execute()
+
 if ($MenteeRadioVal == 'single'){
 
   //Time and Date Check code
@@ -44,6 +42,7 @@ if ($MenteeRadioVal == 'single'){
   if(false ===$check){
     die('execute() failed: ' . htmlspecialchars($stmt->error));
   }
+  //store time slot of entered meeting
   $timeSlotResult = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
    $stmt->close();
    //var_dump($timeSlotResult);
@@ -82,10 +81,12 @@ if ($MenteeRadioVal == 'single'){
      $meetIdMentor = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
       $stmt->close();
 
+      //merge both mentor and mentee meeting ids into one
      $allEnrolledId=array_merge($meetIdMentee, $meetIdMentor);
      //var_dump($allEnrolledId);
      //echo "||||||||||||||||||";
 
+     //for all meetings you are mentee/mentor in get the timeslot and compare it with the meeting you are trying to sign up for.
      for($i=0; $i<count($allEnrolledId); $i++){
        $stmt = $dbConnection->prepare("SELECT time_slot_id, date from meetings where meet_id=?");
        if(false ===$stmt){
@@ -242,7 +243,9 @@ if ($MenteeRadioVal == 'single'){
   }
 
 }//Single radio vlaue close
-if ($MenteeRadioVal == 'Reoccuring'){
+
+//Recurring option selected
+if ($MenteeRadioVal == 'Recurring'){
   $stmt = $dbConnection->prepare("SELECT meet_name FROM meetings WHERE meet_id = ?");
   if(false ===$stmt){
     die('prepare() failed: ' . htmlspecialchars($mysqli->error));
@@ -271,11 +274,12 @@ if ($MenteeRadioVal == 'Reoccuring'){
   if(false ===$check){
     die('execute() failed: ' . htmlspecialchars($stmt->error));
   }
-  $ReoccurIDs = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
+  $RecurIDs = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
   $stmt->close();
 
-  for($k=0;$k<count($ReoccurIDs);$k++){
-  $meetingId = $ReoccurIDs[$k]['meet_id'];
+  //Grab all id's with the same name
+  for($k=0;$k<count($RecurIDs);$k++){
+  $meetingId = $RecurIDs[$k]['meet_id'];
 
   //Time and Date Check code
   //Getting time slot of entered meeting
@@ -329,10 +333,12 @@ if ($MenteeRadioVal == 'Reoccuring'){
      $meetIdMentor = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
       $stmt->close();
 
+      //storing meetings you mentor and mentee in
      $allEnrolledId=array_merge($meetIdMentee, $meetIdMentor);
      //var_dump($allEnrolledId);
      //echo "||||||||||||||||||";
 
+     //comparing timeslot of meeting you are trying to sign up for and meetings you are in
      for($i=0; $i<count($allEnrolledId); $i++){
        $stmt = $dbConnection->prepare("SELECT time_slot_id, date from meetings where meet_id=?");
        if(false ===$stmt){
@@ -487,8 +493,8 @@ if ($MenteeRadioVal == 'Reoccuring'){
   }else{
     echo "Student is not in the same grade level as the meeting";
   }
-}//for ReoocurID loop CLose
+}//for RecurID loop CLose
 
-}//Reoccuring radio value close
+}//Recurring radio value close
 $dbConnection->close();
 ?>

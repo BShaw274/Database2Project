@@ -6,34 +6,41 @@
 <h1>Sunny Youth Club</h1>
 <h2>Student Registration</h2>
 
+<!-- Php file takes in input from fields here and creates a student account if all information is correct/valid -->
 <form action="userSignupStudent.php" method="post">
 <table border="0">
 <tr bgcolor="#cccccc">
   <td width="150">Input User Information</td>
 </tr>
 <tr>
+  <!-- Student's Email -->
   <td>Email</td>
   <td align="left"><input type="email" name="userEmail" size="20" maxlength="30"/></td>
 </tr>
 <tr>
+  <!-- Student's Password -->
   <td>Password</td>
   <td align="left"><input type="password" name="userPassword" size="20" maxlength="30"/></td>
 </tr>
 <tr>
+  <!-- Student's name -->
   <td>Name</td>
   <td align="left"><input type="text" name="userName" size="20" maxlength="30"/></td>
 </tr>
 <tr>
+  <!-- Student's phone number -->
   <td>Phone Number</td>
   <td align="center"><input type="text" name="userPhone" size="20" maxlength="10"/></td>
 </tr>
 
 <tr>
+  <!-- Student's Grade level -->
   <td>Grade Level</td>
   <td align="left"><input type="number" name="grade" size="20" min="6" max="12"/></td>
 </tr>
 
 <tr>
+  <!-- Parent id attached to student -->
   <td>Parent ID</td>
   <td align="left"><input type="number" name="parent_id" size="20" /></td>
 </tr>

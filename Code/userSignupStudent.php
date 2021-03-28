@@ -1,11 +1,9 @@
 <?php
-// Getting info posted from userSignupStudent.html form action line 9
+// Getting info posted from userSignupStudent.html form action line 10
 $userEmail = $_POST['userEmail'];
 $userPassword = $_POST['userPassword'];
 $userName = $_POST['userName'];
 $userPhone = $_POST['userPhone'];
-
-//Attributes that are pertains to student
 $grade = $_POST['grade'];
 $parent_id = $_POST['parent_id'];
 
@@ -16,12 +14,7 @@ if ($dbConnection->connect_error) {
 }
 
 
-echo " Testing echo ID: ".$parent_id."  Email: ".$userEmail." Password: ".$userPassword." Name: ".$userName." Phone: ".$userPhone;
-
-/*$query='SELECT DISTINCT parent_id, FROM parents where parent_id = ' .$parent_id;
-$result = mysqli_query($dbConnection, $query) or die ('Query Failed: Parent ID does not exist');*/
-
-
+//This query matches an existing parent id to the Id entered in the parent id field
 $stmt = $dbConnection->prepare("SELECT parent_id FROM parents Where parent_id = ?");
 if(false ===$stmt){
   die('prepare() failed: ' . htmlspecialchars($mysqli->error));
@@ -34,12 +27,17 @@ $check = $stmt->execute();
 if(false ===$check){
   die('execute() failed: ' . htmlspecialchars($stmt->error));
 }
-$stmt->close();
-//Actual Code (creating user first):
+//Array holding results of valid parents
+$validParentCheck = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 
-// Style borrowed : https://stackoverflow.com/questions/2552545/mysqli-prepared-statements-error-reporting
-//Uses Prepared Statements to prepare Query String, Uses bind_param to insert variables into the Query String e
+$stmt->close();
+
+//Checks if there is any valid parents
+if(!(empty($validParentCheck))){
+  
+//Uses Prepared Statements to prepare Query String, Uses bind_param to insert variables into the Query String
 //then pushes the query to the Database with Execute()
+//This specific prepared statesment inserts information about a student into the users table
 $stmt = $dbConnection->prepare("INSERT INTO users (email, password, name, phone) VALUES (?, ?, ?, ?)");
 if(false ===$stmt){
   die('prepare() failed: ' . htmlspecialchars($mysqli->error));
@@ -64,8 +62,8 @@ $dbConnection->close();
 
 
 
-//Inserting ID into parents
-//Doing the above but just the ID into parent table, parent_id
+//Inserting ID into students
+//Doing the above but just the ID into student table
 //Connection opened and Tested
 $dbConnection = new mysqli('localhost', 'root', '', 'db2');
 if ($dbConnection->connect_error) {
@@ -87,5 +85,10 @@ if(false ===$check){
 
 $stmt->close();
 $dbConnection->close();
+}
 
+//If parent id is not valid then let user know and dont create account
+if(empty($validParentCheck)){
+  echo "Not valid parent cannot sign up";
+}
 ?>
