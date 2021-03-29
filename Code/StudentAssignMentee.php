@@ -13,7 +13,7 @@ if ($dbConnection->connect_error) {
 }
 //Actual Code:
 
-// checks to see if the meeting is late
+/* checks to see if the meeting is late
 $sql = "SELECT  meet_id
 FROM meetings
 Where ((DAYOFWEEK(date) = 7 AND DATEDIFF( date, CURRENT_TIMESTAMP) < 3) OR (DAYOFWEEK(date) = 1 AND DATEDIFF( date, CURRENT_TIMESTAMP) < 2)) AND meet_id = " . $meetingId. ";";
@@ -24,7 +24,7 @@ if (mysqli_num_rows($result)) {
     $dbConnection->close();
     die();
 }
-
+*/
 
 if ($MenteeRadioVal == 'single'){
 
