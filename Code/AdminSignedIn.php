@@ -201,7 +201,7 @@
 </table>
 
 <a href="ThursdayRun.php">
-   <button>Meetings that need more mentees</button>
+  <p>Thursday run</p>
 </a>
 
 
