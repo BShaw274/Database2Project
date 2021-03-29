@@ -106,7 +106,7 @@ Union
 SELECT meet_id
 FROM enroll2
 GROUP BY meet_id
-having COUNT(mentor_id) < 2) );";
+having COUNT(mentor_id) < 2) ;";
 // checks database deleted meetings correctlty
 if (mysqli_query($myconnection, $sql)) {
   echo "<br>Empty meetings deleted successfully<br>";
