@@ -114,6 +114,7 @@
 </tr>
 </form>
 
+<h2>Assigning Mentors, Mentees, and Study Materials to Meetings</h2>
 
 <!--Assigning a mentor to a meeting-->
 <form action="AdminAssignMentor.php" method="post">
@@ -144,7 +145,9 @@
 
 </form>
 </table>
-<h2>Assigning mentors, mentees, and study materials to meetings</h2>
+
+
+
 <!--Assigning a mentee to a meeting-->
 <form action="AdminAssignMentee.php" method="post">
 <table border="0">
@@ -178,7 +181,7 @@
 <form action="AdminAssignStudyMaterials.php" method="post">
 <table border="0">
 <tr bgcolor="#cccccc">
-  <td width="150">Add Study Materials to a meeting</td>
+  <td width="150">Add Study Materials to a Meeting</td>
 </tr>
 
 <tr>
@@ -201,7 +204,6 @@
 
 
 <?php
-// Old code from ParentLogin that needs to be adapted
 //Opening Connection
 $dbConnection = new mysqli('localhost', 'root', '', 'db2');
 if ($dbConnection->connect_error) {
