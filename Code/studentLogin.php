@@ -296,6 +296,15 @@ if ($dbConnection->connect_error) {
 */ //No need for 2 connections
 
 
+/*
+
+This section is for displaying study materials for the current and past meeting. It starts by getting the current date and
+getting the meeting a for the current week and the previous week. After it gets those meeting Ids it then prints all of
+the data within those materials.
+
+*/
+
+
 $currentDate = date('Y-m-d');
 $currentWeek = new dateTime($currentDate);
 $previousWeek = new dateTime($currentDate);
@@ -303,7 +312,7 @@ $previousWeek = new dateTime($currentDate);
 $currentWeek->modify('+1 week');
 $previousWeek->modify('-1 week');
 
-
+//this is  the query to get the material ids in the correct timeframe
 $query  = "SELECT material_id FROM assign
 INNER JOIN meetings ON assign.meet_id = meetings.meet_id
 WHERE meetings.date >= '{$previousWeek->format('Y-m-d')}' AND meetings.date <= '{$currentWeek->format('Y-m-d')}'";
@@ -311,7 +320,6 @@ $results = mysqli_query($dbConnection, $query);
 
 $materialIds = [];
 while ($row = mysqli_fetch_array ($results, MYSQLI_ASSOC)) {
-  //$materialIds += $row['material_id'];
   //echo $meetingGrade;
   array_push($materialIds, $row['material_id']);
 }

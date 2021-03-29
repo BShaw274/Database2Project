@@ -127,9 +127,9 @@ $result = mysqli_query($dbConnection, $query);
 
 //checking if the id is already in the mentees
 if(mysqli_num_rows($result) > 0){
-  echo "Student already a mentee";
+  //echo "Student already a mentee";
 } else{
-  echo "The student is not already a mentee";
+  //echo "The student is not already a mentee";
   $stmt = $dbConnection->prepare("INSERT INTO mentees (mentee_id) VALUES (?)");
   if(false ===$stmt){
     die('prepare() failed: ' . htmlspecialchars($mysqli->error));
@@ -374,9 +374,9 @@ if ($MenteeRadioVal == 'Reoccuring'){
 
     //checking if the id is already in the mentees
     if(mysqli_num_rows($result) > 0){
-      echo "Student already a mentee";
+      //echo "Student already a mentee";
     } else{
-      echo "The student is not already a mentee";
+      //echo "The student is not already a mentee";
       $stmt = $dbConnection->prepare("INSERT INTO mentees (mentee_id) VALUES (?)");
       if(false ===$stmt){
         die('prepare() failed: ' . htmlspecialchars($mysqli->error));
