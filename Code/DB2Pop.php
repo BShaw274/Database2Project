@@ -3,6 +3,8 @@
 //Creates new instance of the Database that Cindy gave us
 $DOCUMENT_ROOT = $_SERVER['DOCUMENT_ROOT'];
 
+$DBInit = $_POST['DB'];
+
 // Connects to the SQL Server
 if($myconnection = mysqli_connect('localhost', 'root', '') ){
     echo "Connected to Sql Server<br>";
@@ -26,11 +28,14 @@ if($mydb = mysqli_select_db ($myconnection, 'db2')){
 }
 
 //gets DB2 sql puts it into $query
-$fp = fopen("$DOCUMENT_ROOT/code/DB2Pop.sql",'r');
+$fp = fopen("$DOCUMENT_ROOT/code/DB2PopClean.sql",'r');
+if($DBInit == "Test"){
+    $fp = fopen("$DOCUMENT_ROOT/code/DB2PopTest.sql",'r');
+}
 $query = "";
 while(!feof($fp)) {
     $newLine = fgets($fp);
-    echo $newLine . "<br>";
+    // echo $newLine . "<br>";
     $query = $query . $newLine  ;
 }
 fclose($fp);
@@ -40,7 +45,7 @@ $query = $query . "" ;
 
 // runs query to build DB2 database
 if(mysqli_multi_query($myconnection, $query)) {
-    echo "DB2 populating successfully";
+    echo $DBInit . " DB2 populated successfully";
   } else {
     echo "Error populating DB2: " . mysqli_error($myconnection);
   }
