@@ -48,13 +48,21 @@ if ($recurringCheck == 0){
   $dbConnection->close();
 
 } else{
-    for($i = 0; $i < 10; $i++){
+    $start_date = $meetingDateTime;
+    //end date is when the semester ends
+    // current date is based off off uml ending
+    $end_date = date_add(date_create_from_format("Y",date('Y')),date_interval_create_from_date_string("134 days"));
+  
+    // echo date_diff($start_date,$end_date)->format("%r") == '';
+    // echo date_diff($start_date,$end_date)->format("%r") != '';
+    while (date_diff($start_date,$end_date)->format("%r") == '') {
+
       $stmt = $dbConnection->prepare("INSERT INTO meetings (meet_name, date, time_slot_id, capacity, announcement, group_id) VALUES (?, ?, ?, ?, ?, ?)");
       if(false ===$stmt){
         die('prepare() failed: ' . htmlspecialchars($stmt->error));
       }
-
-      $check = $stmt->bind_param("ssssss", $meetingName, $meetingDateTime->format('Y-m-d'), $meetingTimeSlot, $meetingCapacity, $meetingAnnouncement, $meetingGroupId);
+      $x = $meetingDateTime->format('Y-m-d');
+      $check =$stmt->bind_param("ssssss", $meetingName, $x , $meetingTimeSlot, $meetingCapacity, $meetingAnnouncement, $meetingGroupId);
       if(false ===$check){
         die('bind_param() failed: ' . htmlspecialchars($stmt->error));
       }
