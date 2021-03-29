@@ -9,7 +9,7 @@
 <h2>Parent's  Page </h2>
 
 <h3>Update Account Information</h3>
-<p>Fill in the fields with the updated information and sumbit to update your profile! </p>
+<p>Fill in the fields with the updated information and submit to update your profile! </p>
 <br>
 <form action="selfUpdate.php" method="post">
 
