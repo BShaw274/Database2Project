@@ -343,36 +343,41 @@ for ($i = 0; $i < mysqli_num_rows($results); $i++){
 <!-- Displays info about meetings that you can try to join -->
 <h4>Meeting Information</h4>
 <?php
-$sql = "SELECT * from meetings";
-$result = mysqli_query($dbConnection , $sql);
+$sql = "SELECT * from meetings;";
+$result = mysqli_query($dbConnection  , $sql);
 
 if (mysqli_num_rows($result) > 0) {
   // output data of each row
-  echo "<p> ";
-  $i = 1;
+  echo "<table> ";
+  echo  "<tr>
+  <th>Meeting #</th>
+  <th>Meet_ID</th>
+  <th>Meeting Name</th>
+  <th>Date</th>
+  <th>Time Slot ID</th>
+  <th>Capacity</th>
+  <th>Announcement</th>
+  <th>Group ID</th>
+  </tr>";
+  $i = 0;
   while($row = mysqli_fetch_assoc($result)) {
-    echo "Meeting # ".$i ++;
+    echo "<tr>";
+    echo " <td> ". ++$i. "</td> ";
+    echo " <td> ".$row['meet_id']. "</td> ";
+    echo " <td> ".$row['meet_name']. "</td> ";
     echo " ";
-    echo " Meet_ID: ". $row['meet_id'];
+    echo " <td> ".$row['date']. "</td> ";
     echo " ";
-    echo " Meeting Name: ".$row['meet_name'];
+    echo " <td> ".$row['time_slot_id']. "</td> ";
     echo " ";
-    echo " Date: ".$row['date'];
-    echo " ";
-    echo " Time Slot ID: ".$row['time_slot_id'];
-    echo " ";
-    echo " Capacity: ".$row['capacity'];
+    echo " <td> ".$row['capacity']. "</td> ";
     echo "";
-    echo " Announcement: ".$row['announcement'];
+    echo " <td> ".$row['announcement']. "</td> ";
     echo "";
-    echo " Group ID: ".$row['group_id'];
-    echo "";
-    echo "<br>";
-
+    echo " <td> ".$row['group_id']. "</td> ";
   }
-  echo " </p> ";
 } else {
-  echo "0 results";
+  echo "No meetings in database";
 }
 
 

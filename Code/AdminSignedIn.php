@@ -144,7 +144,7 @@
 
 </form>
 </table>
-
+<h2>Assigning mentors, mentees, and study materials to meetings</h2>
 <!--Assigning a mentee to a meeting-->
 <form action="AdminAssignMentee.php" method="post">
 <table border="0">
@@ -211,45 +211,43 @@ if ($dbConnection->connect_error) {
 //session_start();
 //$gid = $_SESSION['passedId'];
 
-$stmt = $dbConnection->prepare("SELECT * from meetings");
-if(false ===$stmt){
-  die('prepare() failed: ' . htmlspecialchars($mysqli->error));
-}
-/*
-$check = $stmt->bind_param("s", $arrayOfStudents[$i]['student_id']);
-if(false ===$check){
-  die('bind_param() failed: ' . htmlspecialchars($stmt->error));
-}
-*/
-$check = $stmt->execute();
-if(false ===$check){
-  die('execute() failed: ' . htmlspecialchars($stmt->error));
-}
+// prints out all meetings and their values
+echo "<h2>Meetings List</h2>";
+$sql = "SELECT * from meetings;";
+$result = mysqli_query($dbConnection  , $sql);
 
-$meetingInfoArr= $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
-//var_dump($meetingInfoArr);
-
-  for($i=0; $i<10; $i++){
-  echo "Meeting # ".$i+1;
-  echo " ";
-  echo " Meet_ID: ".$meetingInfoArr[$i]['meet_id'];
-  echo " ";
-  echo " Meeting Name: ".$meetingInfoArr[$i]['meet_name'];
-  echo " ";
-  echo " Date: ".$meetingInfoArr[$i]['date'];
-  echo " ";
-  echo " Time Slot ID: ".$meetingInfoArr[$i]['time_slot_id'];
-  echo " ";
-  echo " Capacity: ".$meetingInfoArr[$i]['capacity'];
-  echo "";
-  echo " Announcement: ".$meetingInfoArr[$i]['announcement'];
-  echo "";
-  echo " Group ID: ".$meetingInfoArr[$i]['group_id'];
-  echo "";
-  ?>
-  <br>
-  <br>
-  <?php
+if (mysqli_num_rows($result) > 0) {
+  // output data of each row
+  echo "<table> ";
+  echo  "<tr>
+  <th>Meeting #</th>
+  <th>Meet_ID</th>
+  <th>Meeting Name</th>
+  <th>Date</th>
+  <th>Time Slot ID</th>
+  <th>Capacity</th>
+  <th>Announcement</th>
+  <th>Group ID</th>
+  </tr>";
+  $i = 0;
+  while($row = mysqli_fetch_assoc($result)) {
+    echo "<tr>";
+    echo " <td> ". ++$i. "</td> ";
+    echo " <td> ".$row['meet_id']. "</td> ";
+    echo " <td> ".$row['meet_name']. "</td> ";
+    echo " ";
+    echo " <td> ".$row['date']. "</td> ";
+    echo " ";
+    echo " <td> ".$row['time_slot_id']. "</td> ";
+    echo " ";
+    echo " <td> ".$row['capacity']. "</td> ";
+    echo "";
+    echo " <td> ".$row['announcement']. "</td> ";
+    echo "";
+    echo " <td> ".$row['group_id']. "</td> ";
+  }
+} else {
+  echo "No meetings in database";
 }
 ?>
 
